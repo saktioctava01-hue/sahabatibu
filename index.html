@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahabat Ibu - Platform Nakes Digital & Affiliate</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sahabatPink: '#f472b6',
+                        sahabatPinkLight: '#fdf2f8',
+                        sahabatBlue: '#1e3a8a',
+                        sahabatBlueLight: '#3b82f6',
+                        sahabatGold: '#d97706'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+
+    <!-- MAIN LANDING / PUBLIC NAVBAR -->
+    <header id="public-header" class="bg-sahabatBlue text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="switchMainTab('home')">
+                <div class="w-10 h-10 rounded-full bg-sahabatPink flex items-center justify-center text-white font-bold text-xl shadow">
+                    SI
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Sahabat Ibu</h1>
+                    <p class="text-xs text-pink-200">Nakes Digital Affiliate</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium items-center">
+                <button onclick="switchMainTab('home')" class="hover:text-sahabatPink transition">Beranda</button>
+                <button onclick="switchMainTab('classes')" class="hover:text-sahabatPink transition">Kelas & Webinar</button>
+                <button onclick="switchMainTab('vision')" class="hover:text-sahabatPink transition">Visi & Misi</button>
+                <button onclick="checkAuthDashboard()" class="bg-sahabatPink text-sahabatBlue font-bold px-4 py-2 rounded-full hover:bg-pink-300 transition shadow">Member Area</button>
+                <button onclick="openAdminLoginModal()" class="text-xs bg-slate-700 px-3 py-1.5 rounded hover:bg-slate-600 transition"><i class="fa-solid fa-lock mr-1"></i> Admin</button>
+            </nav>
+            <div class="md:hidden flex items-center space-x-2">
+                <button onclick="checkAuthDashboard()" class="bg-sahabatPink text-sahabatBlue font-bold px-3 py-1.5 rounded-full text-xs">Member Area</button>
+                <button onclick="openAdminLoginModal()" class="bg-slate-700 text-white px-2.5 py-1.5 rounded text-xs"><i class="fa-solid fa-lock"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PUBLIC WEBSITE CONTAINER -->
+    <main id="public-container">
+        <!-- 1. HOME / LANDING PAGE -->
+        <section id="tab-home" class="public-tab">
+            <!-- Hero Section -->
+            <div class="bg-gradient-to-r from-sahabatBlue to-blue-900 text-white py-16 px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <span id="site-badge" class="bg-sahabatPink/20 text-pink-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-pink-400/30">Komunitas Nakes Digital & Ibu Berdaya</span>
+                    <h2 id="site-hero-title" class="text-3xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight">Sebarkan Edukasi Kesehatan, Dapatkan Komisi Berkelanjutan Bersama <span class="text-sahabatPink">Sahabat Ibu</span></h2>
+                    <p id="site-hero-desc" class="text-slate-200 text-base md:text-lg mb-8 max-w-2xl mx-auto">Platform khusus tenaga kesehatan & ibu untuk berbagi edukasi, akses webinar bulanan berkualitas, dan nikmati sistem afiliasi MLM yang transparan.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="switchMainTab('classes')" class="bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold px-8 py-3.5 rounded-full shadow-lg transition">Gabung & Pilih Kelas</button>
+                        <button onclick="switchMainTab('vision')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3.5 rounded-full border border-white/30 transition">Kenali Visi Kami</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features & Benefits -->
+            <div class="py-16 max-w-6xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl font-bold text-sahabatBlue">Keuntungan Bergabung di Sahabat Ibu</h3>
+                    <p class="text-slate-600 text-sm mt-2">Dapatkan berbagai fasilitas eksklusif setelah terdaftar sebagai member</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-pink-100 text-sahabatPink rounded-xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h4 class="font-bold text-lg mb-2 text-sahabatBlue">Webinar Bulanan Update</h4>
+                        <p class="text-slate-600 text-sm">Akses kelas dan webinar kesehatan & parenting terbaru setiap bulan yang dibawakan nakes ahli.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-100 text-sahabatBlue rounded-xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <h4 class="font-bold text-lg mb-2 text-sahabatBlue">Komisi MLM Berjenjang</h4>
+                        <p class="text-slate-600 text-sm">Dapatkan komisi penjualan langsung (Level 1: 20%) dan komisi tim/downline (Level 2: 5%) secara otomatis.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-amber-100 text-sahabatGold rounded-xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-gift"></i></div>
+                        <h4 class="font-bold text-lg mb-2 text-sahabatBlue">Bonus Eksklusif</h4>
+                        <p class="text-slate-600 text-sm">Nikmati konsultasi kesehatan gratis, rekaman webinar tanpa batas, dan grup diskusi eksklusif.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Classes Preview -->
+            <div class="bg-sahabatPinkLight py-16 px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex justify-between items-end mb-10">
+                        <div>
+                            <span class="text-sahabatPink font-bold text-xs uppercase tracking-wider">Jadwal Terbaru</span>
+                            <h3 class="text-2xl font-bold text-sahabatBlue">Kelas & Webinar Pilihan</h3>
+                        </div>
+                        <button onclick="switchMainTab('classes')" class="text-sahabatBlue font-semibold text-sm hover:underline">Lihat Semua Kelas &rarr;</button>
+                    </div>
+                    <div id="home-classes-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CLASSES & WEBINARS -->
+        <section id="tab-classes" class="public-tab hidden py-12 px-4 max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-sahabatBlue">Katalog Kelas & Webinar Sahabat Ibu</h2>
+                <p class="text-slate-600 text-sm mt-2">Beli kelas untuk mulai bergabung menjadi member dan aktifkan hak afiliasimu.</p>
+            </div>
+            <div id="full-classes-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </section>
+
+        <!-- 3. VISION & MISSION -->
+        <section id="tab-vision" class="public-tab hidden py-12 px-4 max-w-4xl mx-auto">
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-sahabatBlue text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <h2 class="text-3xl font-bold text-sahabatBlue">Visi & Misi Komunitas Sahabat Ibu</h2>
+                    <p class="text-slate-600 text-sm mt-2">Membangun ekosistem nakes digital yang menebar kebermanfaatan luas.</p>
+                </div>
+                <div class="space-y-6 text-slate-700">
+                    <div class="p-6 bg-slate-50 rounded-2xl border-l-4 border-sahabatPink">
+                        <h3 class="font-bold text-lg text-sahabatBlue mb-2"><i class="fa-solid fa-eye text-sahabatPink mr-2"></i> Visi Kami</h3>
+                        <p id="site-vision-text" class="text-sm leading-relaxed">Menjadi komunitas nakes digital dan ibu berdaya nomor satu di Indonesia yang mengedukasi masyarakat secara luas sekaligus menciptakan kemandirian finansial melalui sistem afiliasi berkeadilan.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl border-l-4 border-sahabatBlue">
+                        <h3 class="font-bold text-lg text-sahabatBlue mb-2"><i class="fa-solid fa-bullseye text-sahabatBlue mr-2"></i> Misi Kami</h3>
+                        <div id="site-mission-text" class="text-sm space-y-2">
+                            <p>• Mengadakan edukasi kesehatan dan parenting berkualitas secara rutin setiap bulan bersama nakes terpercaya.</p>
+                            <p>• Memberdayakan tenaga kesehatan (nakes) agar memiliki wadah digital untuk berkarya dan berbagi ilmu.</p>
+                            <p>• Menyediakan sistem bagi hasil / komisi MLM yang transparan, mudah, dan saling menguntungkan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="public-footer" class="bg-sahabatBlue text-slate-300 py-12 mt-20 border-t border-blue-900">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-2 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sahabatPink flex items-center justify-center text-white font-bold">SI</div>
+                    <span class="text-white font-bold text-lg">Sahabat Ibu</span>
+                </div>
+                <p id="site-footer-desc" class="text-xs text-slate-400 leading-relaxed">Platform pemberdayaan nakes digital dan ibu berdaya melalui edukasi kesehatan berkualitas dan sistem afiliasi terpercaya.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Navigasi Cepat</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="switchMainTab('home')" class="hover:text-sahabatPink transition">Beranda</button></li>
+                    <li><button onclick="switchMainTab('classes')" class="hover:text-sahabatPink transition">Daftar Kelas & Webinar</button></li>
+                    <li><button onclick="switchMainTab('vision')" class="hover:text-sahabatPink transition">Visi & Misi Komunitas</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Kontak & Dukungan</h4>
+                <p id="site-contact-wa" class="text-xs text-slate-400 mb-2"><i class="fa-brands fa-whatsapp mr-1 text-emerald-400"></i> WhatsApp Admin: 0812-3456-7890</p>
+                <p id="site-contact-email" class="text-xs text-slate-400"><i class="fa-solid fa-envelope mr-1 text-sahabatPink"></i> Email: support@sahabatibu.id</p>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 border-t border-blue-900/60 pt-6 text-center text-xs text-slate-500">
+            &copy; 2026 Sahabat Ibu. All rights reserved. Nakes Digital & Affiliate Platform.
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- MEMBER AREA: my.affiliatesahabatibu.id       -->
+    <!-- ========================================== -->
+    <div id="member-area-wrapper" class="hidden min-h-screen bg-slate-100 flex flex-col md:flex-row">
+        <aside class="w-full md:w-72 bg-white border-r border-slate-200 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="p-6 border-b border-slate-100 text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-sahabatPink to-blue-400 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-3 shadow-md border-4 border-pink-50">SI</div>
+                    <h2 class="font-bold text-lg text-sahabatBlue">my.affiliatesahabatibu.id</h2>
+                    <p class="text-xs text-sahabatPink font-semibold mt-1">Assalamualaikum Warahmatullahi Wabarakatuh ^^</p>
+                </div>
+                <nav class="p-4 space-y-1 text-sm font-medium">
+                    <button onclick="switchMemberTab('kelas')" id="m-menu-kelas" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sahabatBlue bg-pink-50 font-bold transition">
+                        <i class="fa-solid fa-download w-5 text-sahabatPink"></i><span>Akses Kelasku</span>
+                    </button>
+                    <button onclick="switchMemberTab('afiliasi')" id="m-menu-afiliasi" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-bullhorn w-5 text-sahabatPink"></i><span>Menu Afiliasi</span>
+                    </button>
+                    <button onclick="switchMemberTab('dashboard')" id="m-menu-dashboard" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-chart-line w-5 text-sahabatPink"></i><span>Dashboard</span>
+                    </button>
+                    <button onclick="switchMemberTab('leaderboard')" id="m-menu-leaderboard" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-trophy w-5 text-sahabatPink"></i><span>Leaderboard</span>
+                    </button>
+                    <button onclick="switchMemberTab('profile')" id="m-menu-profile" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-user w-5 text-sahabatPink"></i><span>Profile & Bank</span>
+                    </button>
+                    <button onclick="logoutMember()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition mt-6">
+                        <i class="fa-solid fa-right-from-bracket w-5"></i><span>Logout</span>
+                    </button>
+                </nav>
+            </div>
+            <div class="p-4 text-center text-xs text-slate-400 border-t border-slate-100">Member Area v2.0</div>
+        </aside>
+
+        <div class="flex-1 flex flex-col min-h-screen">
+            <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center md:hidden">
+                <span class="font-bold text-sahabatBlue text-sm">my.affiliatesahabatibu.id</span>
+                <span id="mobile-member-name" class="text-xs bg-pink-100 text-sahabatPink font-bold px-3 py-1 rounded-full">Member</span>
+            </header>
+
+            <div class="p-6 md:p-10 max-w-5xl w-full mx-auto flex-1">
+                <!-- TAB 1: AKSES KELASKU -->
+                <div id="m-tab-kelas" class="member-tab-content space-y-6">
+                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+                        <div class="text-center mb-6">
+                            <span class="text-xs font-bold text-sahabatPink uppercase tracking-wider">Selamat Datang di Member Area 😊</span>
+                            <h3 class="text-2xl font-bold text-sahabatBlue mt-1">Sebelum Mulai Belajar Pastikan :</h3>
+                        </div>
+                        <div class="space-y-4 text-slate-700 text-sm max-w-2xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200/60 leading-relaxed">
+                            <p><strong>1.</strong> Memulai dengan berdoa agar diberikan kemudahan, pemahaman dan ilmu bermanfaat.</p>
+                            <p><strong>2.</strong> Usahakan tidak multitasking saat belajar, karena belajar adalah aktivitas yang membutuhkan fokus.</p>
+                            <p><strong>3.</strong> Tidak memberikan apalagi menyebarkan akses kepada selain peserta yang terdaftar resmi. 😊</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+                            <button onclick="alert('Membuka materi video & modul kelas webinar aktif!')" class="bg-gradient-to-r from-pink-500 to-sahabatPink text-white font-bold px-6 py-3 rounded-xl shadow hover:opacity-90 transition text-sm">
+                                <i class="fa-solid fa-bookmark mr-2"></i> Lihat Menu Kelas Lain DISINI
+                            </button>
+                            <button onclick="alert('Menghubungkan ke WhatsApp Bantuan Admin Sahabat Ibu!')" class="bg-gradient-to-r from-blue-600 to-sahabatBlue text-white font-bold px-6 py-3 rounded-xl shadow hover:opacity-90 transition text-sm">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Butuh Bantuan? CHAT DISINI
+                            </button>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <button onclick="alert('Mengarahkan ke Grup Komunitas WhatsApp Sahabat Ibu!')" class="w-full max-w-lg mx-auto block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 rounded-xl shadow hover:opacity-90 transition text-sm">
+                                <i class="fa-brands fa-whatsapp mr-2"></i> Arahan masuk ke grup komunitas WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: MENU AFILIASI -->
+                <div id="m-tab-afiliasi" class="member-tab-content hidden space-y-6">
+                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+                        <h3 class="font-bold text-xl text-sahabatBlue mb-2"><i class="fa-solid fa-share-nodes text-sahabatPink mr-2"></i> Link Referral Affiliate & Jaringan MLM</h3>
+                        <p class="text-slate-600 text-sm mb-6">Bagikan link ini untuk merekrut downline dan menjual kelas. Dapatkan komisi Level 1 (20%) dan Level 2 (5%).</p>
+                        <div class="flex flex-col sm:flex-row gap-2 mb-8">
+                            <input type="text" id="referral-link" readonly class="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 font-mono focus:outline-none">
+                            <button onclick="copyReferralLink()" class="bg-sahabatBlue hover:bg-blue-950 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow"><i class="fa-solid fa-copy mr-1"></i> Salin Link</button>
+                        </div>
+                        <h4 class="font-bold text-base text-sahabatBlue mb-4">Daftar Jaringan Downline Anda</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead>
+                                    <tr class="border-b border-slate-200 text-slate-400 uppercase text-xs">
+                                        <th class="pb-3">Nama Member</th>
+                                        <th class="pb-3">Level MLM</th>
+                                        <th class="pb-3">Kelas Dibeli</th>
+                                        <th class="pb-3">Komisi Anda</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="downline-table-body" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: DASHBOARD STATISTIK -->
+                <div id="m-tab-dashboard" class="member-tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-semibold text-slate-400 uppercase">Total Komisi Terkumpul</p>
+                            <h3 id="stat-commission" class="text-3xl font-extrabold text-sahabatBlue mt-2">Rp 0</h3>
+                            <p class="text-xs text-emerald-600 mt-1"><i class="fa-solid fa-circle-check"></i> Siap dicairkan</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-semibold text-slate-400 uppercase">Downline Level 1</p>
+                            <h3 id="stat-level1" class="text-3xl font-extrabold text-sahabatPink mt-2">0 Orang</h3>
+                            <p class="text-xs text-slate-500 mt-1">Komisi 20%</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-semibold text-slate-400 uppercase">Downline Level 2</p>
+                            <h3 id="stat-level2" class="text-3xl font-extrabold text-blue-500 mt-2">0 Orang</h3>
+                            <p class="text-xs text-slate-500 mt-1">Komisi 5%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: LEADERBOARD -->
+                <div id="m-tab-leaderboard" class="member-tab-content hidden space-y-6">
+                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-12 h-12 bg-amber-100 text-sahabatGold rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-trophy"></i></div>
+                            <div>
+                                <h3 class="font-bold text-xl text-sahabatBlue">Leaderboard Affiliator Terbaik</h3>
+                                <p class="text-xs text-slate-500">Peringkat penjualan kelas terbanyak bulan ini</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-pink-50 rounded-2xl border border-pink-100">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-8 h-8 rounded-full bg-sahabatPink text-white font-bold flex items-center justify-center text-sm">1</span>
+                                    <div><h4 class="font-bold text-sahabatBlue text-sm">Siti Aminah, S.Tr.Keb</h4><p class="text-xs text-slate-500">Total Penjualan: 24 Kelas</p></div>
+                                </div>
+                                <span class="text-xs font-bold bg-pink-200 text-sahabatBlue px-3 py-1 rounded-full">Top #1</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-8 h-8 rounded-full bg-slate-300 text-slate-700 font-bold flex items-center justify-center text-sm">2</span>
+                                    <div><h4 class="font-bold text-sahabatBlue text-sm">Rini Lestari</h4><p class="text-xs text-slate-500">Total Penjualan: 18 Kelas</p></div>
+                                </div>
+                                <span class="text-xs font-bold bg-slate-200 text-slate-700 px-3 py-1 rounded-full">Top #2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: PROFILE & BANK ACCOUNT -->
+                <div id="m-tab-profile" class="member-tab-content hidden space-y-6">
+                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100 max-w-xl mx-auto">
+                        <h3 class="font-bold text-xl text-sahabatBlue mb-2">Profil & Rekening Pencairan Komisi</h3>
+                        <p class="text-slate-600 text-sm mb-6">Masukkan data rekening bank atas nama kamu sendiri agar transfer komisi lancar.</p>
+                        <form id="bank-form" onsubmit="saveBankAccount(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Bank</label>
+                                <select id="bank-name" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                                    <option value="">Pilih Bank</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="Mandiri">Mandiri</option>
+                                    <option value="BNI">BNI</option>
+                                    <option value="BRI">BRI</option>
+                                    <option value="SeaBank">SeaBank</option>
+                                    <option value="Jago">Bank Jago</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Nomor Rekening</label>
+                                <input type="text" id="bank-acc-no" required placeholder="Contoh: 1234567890" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Pemilik Rekening (Sesuai KTP)</label>
+                                <input type="text" id="bank-acc-name" required placeholder="Contoh: Siti Aminah, S.Tr.Keb" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                            </div>
+                            <button type="submit" class="w-full bg-sahabatBlue hover:bg-blue-950 text-white font-semibold py-3 rounded-xl transition shadow">Simpan Rekening Bank</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- ADMIN PANEL WRAPPER: /admin                -->
+    <!-- ========================================== -->
+    <div id="admin-panel-wrapper" class="hidden min-h-screen bg-slate-900 text-slate-100 py-10 px-4">
+        <div class="max-w-5xl mx-auto space-y-8">
+            <div class="flex justify-between items-center bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-sahabatPink text-sahabatBlue rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div>
+                        <h2 class="text-xl font-bold">Admin CMS: sahabat-ibu.netlify.app/admin</h2>
+                        <p class="text-xs text-slate-400">Edit keseluruhan isi website utama tanpa ubah kode</p>
+                    </div>
+                </div>
+                <button onclick="logoutAdmin()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"><i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Admin</button>
+            </div>
+
+            <!-- Admin Navigation Tabs -->
+            <div class="flex space-x-2 border-b border-slate-700 overflow-x-auto pb-2">
+                <button onclick="switchAdminCMS('content')" id="cms-btn-content" class="px-5 py-2.5 font-semibold text-sm bg-sahabatPink text-sahabatBlue rounded-xl transition whitespace-nowrap">Edit Konten Utama Website</button>
+                <button onclick="switchAdminCMS('classes')" id="cms-btn-classes" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Kelola Kelas Webinar</button>
+                <button onclick="switchAdminCMS('leads')" id="cms-btn-leads" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Database Leads & Member</button>
+            </div>
+
+            <!-- CMS Pane 1: Edit General Website Content -->
+            <div id="cms-pane-content" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Pengaturan Teks & Visi Misi Website Utama</h3>
+                <form onsubmit="saveSiteContent(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Badge Atas Hero</label>
+                            <input type="text" id="admin-badge" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Nomor WhatsApp Admin (Footer)</label>
+                            <input type="text" id="admin-wa" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Judul Utama Hero (Heading)</label>
+                        <textarea id="admin-herotitle" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Deskripsi Hero</label>
+                        <textarea id="admin-herodesc" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Teks Visi Komunitas</label>
+                        <textarea id="admin-vision" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink"></textarea>
+                    </div>
+                    <button type="submit" class="bg-sahabatPink text-sahabatBlue font-bold px-6 py-3 rounded-xl text-sm shadow hover:bg-pink-400 transition">Simpan Perubahan Konten</button>
+                </form>
+            </div>
+
+            <!-- CMS Pane 2: Manage Classes -->
+            <div id="cms-pane-classes" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Tambah & Kelola Kelas Webinar</h3>
+                <form onsubmit="adminAddClass(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Judul Kelas</label>
+                        <input type="text" id="new-class-title" required placeholder="Judul Webinar" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Harga (Rp)</label>
+                        <input type="number" id="new-class-price" required placeholder="150000" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Tanggal / Jadwal</label>
+                        <input type="text" id="new-class-date" required placeholder="15 November 2026" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Pemateri</label>
+                        <input type="text" id="new-class-speaker" required placeholder="Bidan Aisyah, S.Tr.Keb" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-sahabatPink text-sahabatBlue font-bold px-6 py-2.5 rounded-xl text-sm shadow">Tambah Kelas Baru</button>
+                    </div>
+                </form>
+                <div>
+                    <h4 class="font-bold text-sm text-slate-300 mb-3">Daftar Kelas Aktif</h4>
+                    <div id="admin-classes-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- CMS Pane 3: Leads -->
+            <div id="cms-pane-leads" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Database Leads & Member Terdaftar</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-slate-400 uppercase text-xs">
+                                <th class="pb-2">Nama</th>
+                                <th class="pb-2">Email</th>
+                                <th class="pb-2">No WhatsApp</th>
+                                <th class="pb-2">Kelas Dibeli</th>
+                                <th class="pb-2">Upline Referral</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-leads-tbody" class="divide-y divide-slate-700/50"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL: LOGIN ADMIN (sahabat-ibu.netlify.app/admin) -->
+    <div id="modal-admin-login" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 md:p-8 relative shadow-2xl text-slate-100">
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-sahabatPink text-sahabatBlue rounded-full flex items-center justify-center text-xl mx-auto mb-3 font-bold"><i class="fa-solid fa-lock"></i></div>
+                <h3 class="font-bold text-xl text-white">Login Admin CMS</h3>
+                <p class="text-xs text-slate-400 mt-1">Masukkan kunci akses website sahabat-ibu.netlify.app/admin</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Username Admin</label>
+                    <input type="text" id="admin-user-input" required placeholder="saktioctavia / aisfarida" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Password</label>
+                    <input type="password" id="admin-pass-input" required placeholder="••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sahabatPink">
+                </div>
+                <button type="submit" class="w-full bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold py-3 rounded-xl transition shadow">Masuk ke Panel Admin</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL: LOGIN / REGISTER MEMBER (LEADS CAPTURE) -->
+    <div id="modal-login" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 relative shadow-xl">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-pink-100 text-sahabatPink rounded-full flex items-center justify-center text-xl mx-auto mb-3"><i class="fa-solid fa-user-lock"></i></div>
+                <h3 class="font-bold text-xl text-sahabatBlue" id="modal-title">Gabung & Beli Kelas</h3>
+                <p class="text-xs text-slate-500 mt-1" id="modal-subtitle">Masukkan Email & No WhatsApp untuk akses kelas dan masuk ke my.affiliatesahabatibu.id.</p>
+            </div>
+            <form id="lead-login-form" onsubmit="handleLeadSubmit(event)" class="space-y-4">
+                <input type="hidden" id="selected-class-id">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap</label>
+                    <input type="text" id="lead-name" required placeholder="Nama Anda" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Alamat Email</label>
+                    <input type="email" id="lead-email" required placeholder="email@domain.com" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nomor WhatsApp (Aktif)</label>
+                    <input type="text" id="lead-wa" required placeholder="08xxxxxxxxxx" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                </div>
+                <button type="submit" class="w-full bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold py-3 rounded-xl transition shadow">Konfirmasi & Masuk Member Area</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Database CMS & Classes Default
+        let siteContent = JSON.parse(localStorage.getItem('si_site_content')) || {
+            badge: 'Komunitas Nakes Digital & Ibu Berdaya',
+            heroTitle: 'Sebarkan Edukasi Kesehatan, Dapatkan Komisi Berkelanjutan Bersama Sahabat Ibu',
+            heroDesc: 'Platform khusus tenaga kesehatan & ibu untuk berbagi edukasi, akses webinar bulanan berkualitas, dan nikmati sistem afiliasi MLM yang transparan.',
+            vision: 'Menjadi komunitas nakes digital dan ibu berdaya nomor satu di Indonesia yang mengedukasi masyarakat secara luas sekaligus menciptakan kemandirian finansial melalui sistem afiliasi berkeadilan.',
+            wa: '0812-3456-7890'
+        };
+
+        let classesData = JSON.parse(localStorage.getItem('si_classes')) || [
+            { id: 1, title: 'Strategi Nakes Membangun Personal Branding Digital', price: 150000, date: '10 November 2026', speaker: 'Dr. Rina Puspita' },
+            { id: 2, title: 'Mastering Affiliate Marketing untuk Tenaga Kesehatan', price: 200000, date: '22 November 2026', speaker: 'Bidan Siska Meliana' },
+            { id: 3, title: 'Kelas Parenting & Kesehatan Ibu Hamil Era Modern', price: 125000, date: '05 Desember 2026', speaker: 'Ns. Dewi Anggraini' }
+        ];
+
+        let membersData = JSON.parse(localStorage.getItem('si_members')) || [
+            { id: 'm1', name: 'Siti Aminah', email: 'siti@gmail.com', wa: '081211112222', upline: null, bank: { name: 'BCA', no: '12345678', accName: 'Siti Aminah' }, purchasedClasses: [1] },
+            { id: 'm2', name: 'Rini Lestari', email: 'rini@gmail.com', wa: '081233334444', upline: 'm1', bank: { name: 'Mandiri', no: '87654321', accName: 'Rini Lestari' }, purchasedClasses: [1, 2] }
+        ];
+
+        let currentMemberId = localStorage.getItem('si_current_member') || null;
+        let isAdminLoggedIn = localStorage.getItem('si_admin_logged') === 'true';
+        let activeReferralUpline = null;
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get('ref');
+            if (ref) {
+                activeReferralUpline = ref;
+                localStorage.setItem('si_ref', ref);
+            } else {
+                activeReferralUpline = localStorage.getItem('si_ref') || null;
+            }
+
+            // Check if URL is /admin
+            if (window.location.pathname.includes('admin') || isAdminLoggedIn) {
+                if (isAdminLoggedIn) {
+                    showAdminPanel();
+                } else {
+                    openAdminLoginModal();
+                }
+            } else if (currentMemberId) {
+                showMemberArea();
+            } else {
+                showPublicArea();
+            }
+
+            renderSiteContent();
+            renderClasses();
+            renderAdminData();
+        };
+
+        // Render Public Content from CMS
+        function renderSiteContent() {
+            document.getElementById('site-badge').innerText = siteContent.badge;
+            document.getElementById('site-hero-title').innerHTML = siteContent.heroTitle.replace('Sahabat Ibu', '<span class="text-sahabatPink">Sahabat Ibu</span>');
+            document.getElementById('site-hero-desc').innerText = siteContent.heroDesc;
+            document.getElementById('site-vision-text').innerText = siteContent.vision;
+            document.getElementById('site-contact-wa').innerHTML = `<i class="fa-brands fa-whatsapp mr-1 text-emerald-400"></i> WhatsApp Admin: ${siteContent.wa}`;
+
+            // Populate Admin Form Inputs
+            document.getElementById('admin-badge').value = siteContent.badge;
+            document.getElementById('admin-wa').value = siteContent.wa;
+            document.getElementById('admin-herotitle').value = siteContent.heroTitle;
+            document.getElementById('admin-herodesc').value = siteContent.heroDesc;
+            document.getElementById('admin-vision').value = siteContent.vision;
+        }
+
+        // Save CMS Content
+        function saveSiteContent(event) {
+            event.preventDefault();
+            siteContent = {
+                badge: document.getElementById('admin-badge').value,
+                heroTitle: document.getElementById('admin-herotitle').value,
+                heroDesc: document.getElementById('admin-herodesc').value,
+                vision: document.getElementById('admin-vision').value,
+                wa: document.getElementById('admin-wa').value
+            };
+            localStorage.setItem('si_site_content', JSON.stringify(siteContent));
+            renderSiteContent();
+            alert('Konten website utama berhasil diperbarui secara instan!');
+        }
+
+        // Navigation Tabs
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.public-tab').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchMemberTab(tabId) {
+            document.querySelectorAll('.member-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('m-tab-' + tabId).classList.remove('hidden');
+
+            ['kelas', 'afiliasi', 'dashboard', 'leaderboard', 'profile'].forEach(m => {
+                const btn = document.getElementById('m-menu-' + m);
+                if (m === tabId) {
+                    btn.className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sahabatBlue bg-pink-50 font-bold transition";
+                } else {
+                    btn.className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition";
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showPublicArea() {
+            document.getElementById('public-header').classList.remove('hidden');
+            document.getElementById('public-container').classList.remove('hidden');
+            document.getElementById('public-footer').classList.remove('hidden');
+            document.getElementById('member-area-wrapper').classList.add('hidden');
+            document.getElementById('admin-panel-wrapper').classList.add('hidden');
+            switchMainTab('home');
+        }
+
+        function showMemberArea() {
+            document.getElementById('public-header').classList.add('hidden');
+            document.getElementById('public-container').classList.add('hidden');
+            document.getElementById('public-footer').classList.add('hidden');
+            document.getElementById('admin-panel-wrapper').classList.add('hidden');
+            document.getElementById('member-area-wrapper').classList.remove('hidden');
+            
+            const member = membersData.find(m => m.id === currentMemberId);
+            if (member) {
+                document.getElementById('mobile-member-name').innerText = member.name;
+            }
+            renderMemberDashboard();
+            switchMemberTab('kelas');
+        }
+
+        function showAdminPanel() {
+            document.getElementById('public-header').classList.add('hidden');
+            document.getElementById('public-container').classList.add('hidden');
+            document.getElementById('public-footer').classList.add('hidden');
+            document.getElementById('member-area-wrapper').classList.add('hidden');
+            document.getElementById('admin-panel-wrapper').classList.remove('hidden');
+            renderAdminData();
+        }
+
+        // Admin Authentication & Login Keys
+        function openAdminLoginModal() {
+            document.getElementById('modal-admin-login').classList.remove('hidden');
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('modal-admin-login').classList.add('hidden');
+        }
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const u = document.getElementById('admin-user-input').value.trim();
+            const p = document.getElementById('admin-pass-input').value.trim();
+
+            // Validasi Kunci Akun Admin
+            if ((u === 'saktioctavia' && p === 'keberhasilan') || (u === 'aisfarida' && p === 'arkana1')) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('si_admin_logged', 'true');
+                closeAdminLoginModal();
+                window.history.pushState({}, '', '/admin');
+                showAdminPanel();
+                alert('Login Admin Berhasil! Selamat datang di CMS sahabat-ibu.netlify.app/admin');
+            } else {
+                alert('Username atau Password Admin salah!');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('si_admin_logged');
+            window.history.pushState({}, '', '/');
+            showPublicArea();
+        }
+
+        // Admin CMS Sub-tabs
+        function switchAdminCMS(tab) {
+            ['content', 'classes', 'leads'].forEach(t => {
+                const pane = document.getElementById('cms-pane-' + t);
+                const btn = document.getElementById('cms-btn-' + t);
+                if (t === tab) {
+                    pane.classList.remove('hidden');
+                    btn.className = "px-5 py-2.5 font-semibold text-sm bg-sahabatPink text-sahabatBlue rounded-xl transition whitespace-nowrap";
+                } else {
+                    pane.classList.add('hidden');
+                    btn.className = "px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap";
+                }
+            });
+        }
+
+        // Render Classes
+        function renderClasses() {
+            const homeHtml = classesData.map(c => `
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-pink-100 text-sahabatPink text-xs font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-calendar mr-1"></i> ${c.date}</span>
+                            <span class="text-sahabatBlue font-extrabold text-sm">Rp ${c.price.toLocaleString('id-ID')}</span>
+                        </div>
+                        <h4 class="font-bold text-sahabatBlue text-base mb-2">${c.title}</h4>
+                        <p class="text-xs text-slate-500 mb-4"><i class="fa-solid fa-chalkboard-user mr-1"></i> Pemateri: ${c.speaker}</p>
+                    </div>
+                    <button onclick="openLoginModal(${c.id})" class="w-full bg-sahabatBlue hover:bg-blue-950 text-white font-semibold py-2.5 rounded-xl text-sm transition">Beli & Gabung Kelas</button>
+                </div>
+            `).join('');
+
+            document.getElementById('home-classes-list').innerHTML = homeHtml;
+            document.getElementById('full-classes-list').innerHTML = homeHtml;
+        }
+
+        function checkAuthDashboard() {
+            if (!currentMemberId) {
+                openLoginModal(classesData[0].id, true);
+            } else {
+                showMemberArea();
+            }
+        }
+
+        function openLoginModal(classId, isGeneralLogin = false) {
+            document.getElementById('selected-class-id').value = classId;
+            if(isGeneralLogin) {
+                document.getElementById('modal-title').innerText = "Login Member Area";
+                document.getElementById('modal-subtitle').innerText = "Masukkan Email & No WhatsApp untuk masuk ke my.affiliatesahabatibu.id.";
+            } else {
+                const cls = classesData.find(c => c.id === classId);
+                document.getElementById('modal-title').innerText = "Beli Kelas: " + (cls ? cls.title : '');
+                document.getElementById('modal-subtitle').innerText = "Masukkan data diri untuk pencatatan leads & aktivasi member.";
+            }
+            document.getElementById('modal-login').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('modal-login').classList.add('hidden');
+        }
+
+        function handleLeadSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('lead-name').value;
+            const email = document.getElementById('lead-email').value;
+            const wa = document.getElementById('lead-wa').value;
+            const classId = parseInt(document.getElementById('selected-class-id').value);
+
+            let member = membersData.find(m => m.email === email || m.wa === wa);
+            if (!member) {
+                const newId = 'm' + (membersData.length + 1);
+                member = {
+                    id: newId,
+                    name: name,
+                    email: email,
+                    wa: wa,
+                    upline: activeReferralUpline || null,
+                    bank: null,
+                    purchasedClasses: [classId]
+                };
+                membersData.push(member);
+            } else {
+                if (!member.purchasedClasses.includes(classId)) {
+                    member.purchasedClasses.push(classId);
+                }
+            }
+
+            localStorage.setItem('si_members', JSON.stringify(membersData));
+            currentMemberId = member.id;
+            localStorage.setItem('si_current_member', currentMemberId);
+
+            closeLoginModal();
+            showMemberArea();
+            renderAdminData();
+            alert('Pendaftaran berhasil! Selamat datang di my.affiliatesahabatibu.id');
+        }
+
+        function logoutMember() {
+            currentMemberId = null;
+            localStorage.removeItem('si_current_member');
+            showPublicArea();
+        }
+
+        function renderMemberDashboard() {
+            const member = membersData.find(m => m.id === currentMemberId);
+            if (!member) return;
+
+            const refLink = window.location.origin + window.location.pathname.replace('/admin','') + '?ref=' + member.id;
+            document.getElementById('referral-link').value = refLink;
+
+            const level1Members = membersData.filter(m => m.upline === member.id);
+            const level1Ids = level1Members.map(m => m.id);
+            const level2Members = membersData.filter(m => level1Ids.includes(m.upline));
+
+            document.getElementById('stat-level1').innerText = level1Members.length + ' Orang';
+            document.getElementById('stat-level2').innerText = level2Members.length + ' Orang';
+
+            let totalComm = 0;
+            let downlineTableHtml = '';
+
+            level1Members.forEach(l1 => {
+                l1.purchasedClasses.forEach(cId => {
+                    const cls = classesData.find(c => c.id === cId);
+                    if (cls) {
+                        const comm = cls.price * 0.20;
+                        totalComm += comm;
+                        downlineTableHtml += `
+                            <tr>
+                                <td class="py-3 font-semibold text-slate-700">${l1.name}</td>
+                                <td class="py-3"><span class="bg-pink-100 text-sahabatPink text-xs px-2.5 py-1 rounded-full font-bold">Level 1 (20%)</span></td>
+                                <td class="py-3 text-slate-600">${cls.title}</td>
+                                <td class="py-3 font-extrabold text-emerald-600">+Rp ${comm.toLocaleString('id-ID')}</td>
+                            </tr>
+                        `;
+                    }
+                });
+            });
+
+            level2Members.forEach(l2 => {
+                l2.purchasedClasses.forEach(cId => {
+                    const cls = classesData.find(c => c.id === cId);
+                    if (cls) {
+                        const comm = cls.price * 0.05;
+                        totalComm += comm;
+                        downlineTableHtml += `
+                            <tr>
+                                <td class="py-3 font-semibold text-slate-700">${l2.name}</td>
+                                <td class="py-3"><span class="bg-blue-100 text-sahabatBlue text-xs px-2.5 py-1 rounded-full font-bold">Level 2 (5%)</span></td>
+                                <td class="py-3 text-slate-600">${cls.title}</td>
+                                <td class="py-3 font-extrabold text-emerald-600">+Rp ${comm.toLocaleString('id-ID')}</td>
+                            </tr>
+                        `;
+                    }
+                });
+            });
+
+            if (downlineTableHtml === '') {
+                downlineTableHtml = `<tr><td colspan="4" class="py-6 text-center text-slate-400 text-xs">Belum ada downline yang membeli kelas. Bagikan link referralmu!</td></tr>`;
+            }
+
+            document.getElementById('stat-commission').innerText = 'Rp ' + totalComm.toLocaleString('id-ID');
+            document.getElementById('downline-table-body').innerHTML = downlineTableHtml;
+
+            if (member.bank) {
+                document.getElementById('bank-name').value = member.bank.name;
+                document.getElementById('bank-acc-no').value = member.bank.no;
+                document.getElementById('bank-acc-name').value = member.bank.accName;
+            }
+        }
+
+        function copyReferralLink() {
+            const copyText = document.getElementById('referral-link');
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+            alert('Link referral berhasil disalin!');
+        }
+
+        function saveBankAccount(event) {
+            event.preventDefault();
+            const member = membersData.find(m => m.id === currentMemberId);
+            if (!member) return;
+
+            member.bank = {
+                name: document.getElementById('bank-name').value,
+                no: document.getElementById('bank-acc-no').value,
+                accName: document.getElementById('bank-acc-name').value
+            };
+
+            localStorage.setItem('si_members', JSON.stringify(membersData));
+            alert('Data rekening bank berhasil disimpan!');
+        }
+
+        function renderAdminData() {
+            const leadsHtml = membersData.map(m => {
+                const purchasedTitles = m.purchasedClasses.map(cId => {
+                    const cls = classesData.find(c => c.id === cId);
+                    return cls ? cls.title : '';
+                }).join(', ');
+                const uplineObj = membersData.find(u => u.id === m.upline);
+                const uplineName = uplineObj ? uplineObj.name : 'Direct (Mandiri)';
+
+                return `
+                    <tr class="border-b border-slate-700/50">
+                        <td class="py-3 font-semibold text-white">${m.name}</td>
+                        <td class="py-3 text-slate-300">${m.email}</td>
+                        <td class="py-3 text-slate-300 font-mono">${m.wa}</td>
+                        <td class="py-3 text-slate-300 text-xs">${purchasedTitles}</td>
+                        <td class="py-3 text-sahabatPink font-semibold text-xs">${uplineName}</td>
+                    </tr>
+                `;
+            }).join('');
+            const leadsTableBody = document.getElementById('admin-leads-tbody');
+            if(leadsTableBody) leadsTableBody.innerHTML = leadsHtml;
+
+            const adminClsHtml = classesData.map(c => `
+                <div class="flex justify-between items-center bg-slate-900 p-3 rounded-xl border border-slate-700 text-sm">
+                    <div>
+                        <span class="font-bold text-sahabatPink">${c.title}</span>
+                        <p class="text-xs text-slate-400">Rp ${c.price.toLocaleString('id-ID')} | ${c.date}</p>
+                    </div>
+                    <button onclick="deleteClass(${c.id})" class="text-red-400 hover:text-red-300 text-xs font-semibold px-3 py-1"><i class="fa-solid fa-trash"></i> Hapus</button>
+                </div>
+            `).join('');
+            const adminClassesList = document.getElementById('admin-classes-list');
+            if(adminClassesList) adminClassesList.innerHTML = adminClsHtml;
+        }
+
+        function adminAddClass(event) {
+            event.preventDefault();
+            const newC = {
+                id: Date.now(),
+                title: document.getElementById('new-class-title').value,
+                price: parseInt(document.getElementById('new-class-price').value),
+                date: document.getElementById('new-class-date').value,
+                speaker: document.getElementById('new-class-speaker').value
+            };
+            classesData.push(newC);
+            localStorage.setItem('si_classes', JSON.stringify(classesData));
+            renderClasses();
+            renderAdminData();
+            event.target.reset();
+            alert('Kelas webinar baru berhasil ditambahkan!');
+        }
+
+        function deleteClass(id) {
+            if(confirm('Yakin ingin menghapus kelas ini?')) {
+                classesData = classesData.filter(c => c.id !== id);
+                localStorage.setItem('si_classes', JSON.stringify(classesData));
+                renderClasses();
+                renderAdminData();
+            }
+        }
+    </script>
+</body>
+</html>
