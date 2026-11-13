@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Sahabat Ibu - Menjadi Sahabat Ibu, Menemani Sepenuh Hati</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sahabatPink: '#f472b6',
+                        sahabatPinkLight: '#fdf2f8',
+                        sahabatBlue: '#1e3a8a',
+                        sahabatBlueLight: '#3b82f6',
+                        sahabatGold: '#d97706'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+
+    <!-- MAIN LANDING / PUBLIC NAVBAR -->
+    <header id="public-header" class="bg-white text-sahabatBlue sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchMainTab('home')">
+                <div id="nav-logo-container" class="w-11 h-11 flex items-center justify-center overflow-hidden shrink-0">
+                    <img src="https://i.ibb.co.com/8gMDYZ5F/Desain-tanpa-judul-20261113-151313-0000.png" alt="Logo Sahabat Ibu" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 id="nav-brand-title" class="font-bold text-sm md:text-base leading-tight">Sahabat Ibu</h1>
+                    <p id="nav-brand-subtitle" class="text-xs text-blue-900">Menjadi Sahabat Ibu, Menemani Sepenuh Hati</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium items-center">
+                <button id="nav-menu-home" onclick="switchMainTab('home')" class="hover:text-sahabatPink transition">Beranda</button>
+                <button id="nav-menu-classes" onclick="switchMainTab('classes')" class="hover:text-sahabatPink transition">Kelas & Webinar</button>
+                <button id="nav-menu-member" onclick="checkAuthDashboard()" class="bg-sahabatPink text-sahabatBlue font-bold px-4 py-2 rounded-full hover:bg-pink-300 transition shadow">Member Area</button>
+                <button onclick="openAdminLoginModal()" class="text-xs bg-slate-700 px-3 py-1.5 rounded hover:bg-slate-600 transition"><i class="fa-solid fa-lock mr-1"></i> <span id="nav-menu-admin">Admin CMS</span></button>
+            </nav>
+            <div class="md:hidden flex items-center space-x-2">
+                <button id="nav-menu-member-mobile" onclick="checkAuthDashboard()" class="bg-sahabatPink text-sahabatBlue font-bold px-3 py-1.5 rounded-full text-xs">Member Area</button>
+                <button onclick="openAdminLoginModal()" class="bg-slate-700 text-white px-2.5 py-1.5 rounded text-xs"><i class="fa-solid fa-lock"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PUBLIC WEBSITE CONTAINER (DINAMIS BERDASARKAN CMS LANDING PAGE) -->
+    <main id="public-container">
+        <section id="tab-home" class="public-tab space-y-0">
+            <!-- Dynamic Sections Rendered Here -->
+            <div id="dynamic-sections-wrapper"></div>
+        </section>
+
+        <!-- CATALOGUE CLASSES TAB -->
+        <section id="tab-classes" class="public-tab hidden py-12 px-4 max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 id="katalog-title" class="text-3xl font-bold text-sahabatBlue">Katalog Kelas & Webinar Sahabat Ibu</h2>
+                <p id="katalog-desc" class="text-slate-600 text-sm mt-2">Beli kelas untuk mulai bergabung menjadi member.</p>
+            </div>
+            <div id="full-classes-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="public-footer" class="bg-sahabatBlue text-slate-300 py-12 border-t border-blue-900">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-2.5 mb-3">
+                    <div id="footer-logo-container" class="w-9 h-9 flex items-center justify-center overflow-hidden shrink-0">
+                        <img src="https://i.ibb.co.com/8gMDYZ5F/Desain-tanpa-judul-20261113-151313-0000.png" alt="Logo Sahabat Ibu" class="w-full h-full object-contain">
+                    </div>
+                    <span id="footer-brand-title" class="text-white font-bold text-lg">Sahabat Ibu</span>
+                </div>
+                <p id="footer-desc" class="text-xs text-slate-400 leading-relaxed">Sahabat Ibu adalah ruang edukasi, berbagi, dan bertumbuh bagi perempuan, ibu, serta keluarga dalam menjalani setiap fase kehidupan.</p>
+            </div>
+            <div>
+                <h4 id="footer-nav-heading" class="text-white font-bold text-sm mb-3">Navigasi Cepat</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button id="footer-link-home" onclick="switchMainTab('home')" class="hover:text-sahabatPink transition">Beranda</button></li>
+                    <li><button id="footer-link-classes" onclick="switchMainTab('classes')" class="hover:text-sahabatPink transition">Daftar Kelas & Webinar</button></li>
+                    <li><button id="footer-link-member" onclick="checkAuthDashboard()" class="hover:text-sahabatPink transition">Member Area</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 id="footer-contact-heading" class="text-white font-bold text-sm mb-3">Kontak & Dukungan</h4>
+                <p class="text-xs text-slate-400 mb-2"><i class="fa-brands fa-whatsapp mr-1 text-emerald-400"></i> <span id="site-contact-wa">WhatsApp Admin: 089655873149</span></p>
+                <p class="text-xs text-slate-400"><i class="fa-solid fa-envelope mr-1 text-sahabatPink"></i> <span id="site-contact-email">Email: sahabatibu72@gmail.com</span></p>
+            </div>
+        </div>
+        <div id="footer-copyright" class="max-w-6xl mx-auto px-4 border-t border-blue-900/60 pt-6 text-center text-xs text-slate-500">
+            &copy; 2026 Sahabat Ibu. Menjadi Sahabat Ibu, Menemani Sepenuh Hati. All rights reserved.
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- MEMBER AREA (DINAMIS DIBANGUN DARI CMS)    -->
+    <!-- ========================================== -->
+    <div id="member-area-wrapper" class="hidden min-h-screen bg-slate-100 flex flex-col md:flex-row">
+        <aside class="w-full md:w-72 bg-white border-r border-slate-200 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="p-6 border-b border-slate-100 text-center">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-3 overflow-hidden" id="member-sidebar-logo-box">
+                        <img src="https://i.ibb.co.com/8gMDYZ5F/Desain-tanpa-judul-20261113-151313-0000.png" alt="Logo Sahabat Ibu" class="w-full h-full object-contain">
+                    </div>
+                    <h2 id="member-domain-title" class="font-bold text-base text-sahabatBlue">my.affiliatesahabatibu.id</h2>
+                    <p id="member-greeting-text" class="text-xs text-sahabatPink font-semibold mt-1">Assalamualaikum Warahmatullahi Wabarakatuh ^^</p>
+                    <span id="member-role-badge" class="inline-block mt-2 px-3 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-sahabatBlue">Member</span>
+                </div>
+                <!-- Dynamic Member Sidebar Nav -->
+                <nav id="member-sidebar-nav" class="p-4 space-y-1 text-sm font-medium"></nav>
+            </div>
+            <div class="p-4 text-center text-xs text-slate-400 border-t border-slate-100">Member Area v5.3</div>
+        </aside>
+
+        <div class="flex-1 flex flex-col min-h-screen">
+            <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center md:hidden">
+                <span id="mobile-member-domain" class="font-bold text-sahabatBlue text-sm">my.affiliatesahabatibu.id</span>
+                <span id="mobile-member-name" class="text-xs bg-pink-100 text-sahabatPink font-bold px-3 py-1 rounded-full">Member</span>
+            </header>
+
+            <div id="member-tabs-container" class="p-6 md:p-10 max-w-5xl w-full mx-auto flex-1">
+                <!-- Dynamic Member Tabs Rendered Here -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- ADMIN PANEL WRAPPER: /admin                -->
+    <!-- ========================================== -->
+    <div id="admin-panel-wrapper" class="hidden min-h-screen bg-slate-900 text-slate-100 py-10 px-4">
+        <div class="max-w-6xl mx-auto space-y-8">
+            <div class="flex justify-between items-center bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-sahabatPink text-sahabatBlue rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div>
+                        <h2 class="text-xl font-bold">Admin CMS Sahabat Ibu</h2>
+                        <p class="text-xs text-slate-400">Edit Semua Judul, Subjudul, Sub-Penjelasan, Landing Page, Member Area, Kelas & Database</p>
+                    </div>
+                </div>
+                <button onclick="logoutAdmin()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"><i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Admin</button>
+            </div>
+
+            <!-- Admin Navigation Tabs -->
+            <div class="flex space-x-2 border-b border-slate-700 overflow-x-auto pb-2">
+                <button onclick="switchAdminCMS('branding')" id="cms-btn-branding" class="px-5 py-2.5 font-semibold text-sm bg-sahabatPink text-sahabatBlue rounded-xl transition whitespace-nowrap">Brand & Sosmed</button>
+                <button onclick="switchAdminCMS('landing')" id="cms-btn-landing" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Landing Page CMS</button>
+                <button onclick="switchAdminCMS('global')" id="cms-btn-global" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Semua Teks, Sub-Penjelasan & Footer</button>
+                <button onclick="switchAdminCMS('membercms')" id="cms-btn-membercms" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Member Area CMS</button>
+                <button onclick="switchAdminCMS('classes')" id="cms-btn-classes" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Kelas & Link WA</button>
+                <button onclick="switchAdminCMS('payment')" id="cms-btn-payment" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">QRIS & Bank</button>
+                <button onclick="switchAdminCMS('leads')" id="cms-btn-leads" class="px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap">Database Member</button>
+            </div>
+
+            <!-- PANE 1: BRAND & SOSMED -->
+            <div id="cms-pane-branding" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Pengaturan Nama Komunitas, Tagline & Media Sosial</h3>
+                <form onsubmit="saveBrandingContent(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Nama Brand / Komunitas (Navbar & Footer)</label>
+                        <input type="text" id="admin-brand-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Tagline / Subjudul Brand</label>
+                        <input type="text" id="admin-brand-tagline" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">URL Logo (Kosongkan jika ingin kembali ke logo huruf SI)</label>
+                        <input type="text" id="admin-logo-url" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Link WhatsApp Utama</label>
+                            <input type="text" id="admin-soc-wa" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Link Instagram</label>
+                            <input type="text" id="admin-soc-ig" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Link TikTok</label>
+                            <input type="text" id="admin-soc-tt" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        </div>
+                    </div>
+                    <button type="submit" class="bg-sahabatPink text-sahabatBlue font-bold px-6 py-3 rounded-xl text-sm shadow">Simpan Perubahan Brand</button>
+                </form>
+            </div>
+
+            <!-- PANE 2: LANDING PAGE CMS -->
+            <div id="cms-pane-landing" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-sahabatPink">Kelola Judul Besar, Subjudul & Penjelasan Setiap Section Landing Page</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Perubahan langsung tersimpan otomatis saat Anda mengetik.</p>
+                    </div>
+                    <button onclick="addLandingSection()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-xs"><i class="fa-solid fa-plus mr-1"></i> Tambah Section Baru</button>
+                </div>
+                <div id="admin-landing-sections-list" class="space-y-4"></div>
+            </div>
+
+            <!-- PANE 3: GLOBAL TEXTS, SUB-SUB PENJELASAN & FOOTER -->
+            <div id="cms-pane-global" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Edit Semua Sub-Sub Penjelasan, Menu Navigasi, Testimoni, Member Area & Footer</h3>
+                <form onsubmit="saveGlobalTexts(event)" class="space-y-6">
+                    <!-- Menu Navbar -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <h4 class="font-bold text-white text-sm">1. Teks Menu Navigasi Atas (Navbar)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Menu 1 (Beranda)</label>
+                                <input type="text" id="gt-navHome" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Menu 2 (Kelas)</label>
+                                <input type="text" id="gt-navClasses" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Member Area</label>
+                                <input type="text" id="gt-navMember" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Admin</label>
+                                <input type="text" id="gt-navAdmin" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol & Sub-Label Landing Page -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <h4 class="font-bold text-white text-sm">2. Teks Tombol & Sub-Label Dokumentasi / Komunitas</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Utama Hero 1</label>
+                                <input type="text" id="gt-heroBtn1" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Utama Hero 2</label>
+                                <input type="text" id="gt-heroBtn2" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Konsultasi</label>
+                                <input type="text" id="gt-consBtn" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Join Komunitas</label>
+                                <input type="text" id="gt-commBtn" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Label Foto Dokumentasi 1</label>
+                                <input type="text" id="gt-docBadge1" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Label Foto Dokumentasi 2</label>
+                                <input type="text" id="gt-docBadge2" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Label Foto Dokumentasi 3</label>
+                                <input type="text" id="gt-docBadge3" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Tombol Daftar Affiliator</label>
+                                <input type="text" id="gt-affBtn" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimoni & Sub-Penjelasan Afiliasi -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-4">
+                        <h4 class="font-bold text-white text-sm">3. Sub-Penjelasan Testimoni Peserta (3 Kartu)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <textarea id="gt-testi1Text" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Isi Testimoni 1"></textarea>
+                            <input type="text" id="gt-testi1Name" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Nama 1">
+                            <input type="text" id="gt-testi1Role" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Profesi/Role 1">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <textarea id="gt-testi2Text" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Isi Testimoni 2"></textarea>
+                            <input type="text" id="gt-testi2Name" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Nama 2">
+                            <input type="text" id="gt-testi2Role" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Profesi/Role 2">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <textarea id="gt-testi3Text" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Isi Testimoni 3"></textarea>
+                            <input type="text" id="gt-testi3Name" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Nama 3">
+                            <input type="text" id="gt-testi3Role" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Profesi/Role 3">
+                        </div>
+
+                        <h4 class="font-bold text-white text-sm pt-2">4. Sub-Sub Penjelasan Kartu Benefit Afiliasi</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <input type="text" id="gt-aff1Title" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white font-bold">
+                            <textarea id="gt-aff1Desc" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <input type="text" id="gt-aff2Title" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white font-bold">
+                            <textarea id="gt-aff2Desc" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Halaman Katalog & Footer -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <h4 class="font-bold text-white text-sm">5. Halaman Katalog Kelas & Bagian Paling Bawah (Footer)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Judul Halaman Katalog Kelas</label>
+                                <input type="text" id="gt-katalogTitle" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Subjudul Halaman Katalog</label>
+                                <input type="text" id="gt-katalogDesc" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-semibold text-slate-400">Penjelasan Tentang Komunitas di Footer</label>
+                                <textarea id="gt-footerAbout" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Judul Kolom Navigasi Footer</label>
+                                <input type="text" id="gt-footerNavHeading" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Judul Kolom Kontak Footer</label>
+                                <input type="text" id="gt-footerContactHeading" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Teks Kontak WhatsApp Footer</label>
+                                <input type="text" id="gt-footerWaText" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Teks Kontak Email Footer</label>
+                                <input type="text" id="gt-footerEmailText" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-semibold text-slate-400">Teks Hak Cipta (Copyright Paling Bawah)</label>
+                                <input type="text" id="gt-footerCopyright" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teks Salam & Panduan di Member Area -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <h4 class="font-bold text-white text-sm">6. Teks Salam & Aturan Belajar di Member Area</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Judul Domain / Header Member</label>
+                                <input type="text" id="gt-memberDomain" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Kalimat Salam Pembuka</label>
+                                <input type="text" id="gt-memberGreeting" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Badge Selamat Datang</label>
+                                <input type="text" id="gt-memberWelcomeBadge" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Judul Utama Akses Kelas</label>
+                                <input type="text" id="gt-memberWelcomeTitle" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-semibold text-slate-400">Poin Aturan Belajar 1</label>
+                                <input type="text" id="gt-memberRule1" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-semibold text-slate-400">Poin Aturan Belajar 2</label>
+                                <input type="text" id="gt-memberRule2" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-semibold text-slate-400">Poin Aturan Belajar 3</label>
+                                <input type="text" id="gt-memberRule3" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="bg-sahabatPink text-sahabatBlue font-bold px-6 py-3 rounded-xl text-sm shadow">Simpan Semua Teks & Penjelasan</button>
+                </form>
+            </div>
+
+            <!-- PANE 4: MEMBER AREA CMS -->
+            <div id="cms-pane-membercms" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                    <h3 class="text-lg font-bold text-sahabatPink">Kelola Menu, Submenu, Hak Akses & Penjelasan Member Area</h3>
+                    <button onclick="addMemberMenu()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-xs"><i class="fa-solid fa-plus mr-1"></i> Tambah Menu Member</button>
+                </div>
+                <div id="admin-member-menus-list" class="space-y-4"></div>
+            </div>
+
+            <!-- PANE 5: KELAS & LINK WA WEBINAR -->
+            <div id="cms-pane-classes" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Kelola Kelas Webinar, Link WA Grup Spesifik, & Diskon Afiliasi</h3>
+                <form onsubmit="adminAddClass(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Judul Kelas</label>
+                        <input type="text" id="new-class-title" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Harga Normal (Rp)</label>
+                        <input type="number" id="new-class-price" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Harga Promo / Diskon Affiliasi (Rp)</label>
+                        <input type="number" id="new-class-disc-price" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" placeholder="Kosongkan jika tidak ada diskon">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Jadwal</label>
+                        <input type="text" id="new-class-date" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Pemateri</label>
+                        <input type="text" id="new-class-speaker" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Link Grup WA Webinar Khusus Kelas Ini</label>
+                        <input type="text" id="new-class-wargroup" placeholder="https://chat.whatsapp.com/..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">URL Poster</label>
+                        <input type="text" id="new-class-poster" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Penjelasan / Deskripsi Detail Kelas</label>
+                        <textarea id="new-class-desc" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white" placeholder="Materi yang akan dipelajari..."></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-sahabatPink text-sahabatBlue font-bold px-6 py-2.5 rounded-xl text-sm shadow">Tambah Kelas Baru</button>
+                    </div>
+                </form>
+                <div>
+                    <h4 class="font-bold text-sm text-slate-300 mb-3">Daftar Kelas Aktif</h4>
+                    <div id="admin-classes-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- PANE 6: QRIS & BANK -->
+            <div id="cms-pane-payment" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Pengaturan Gambar QRIS & Rekening Bank Pembayaran</h3>
+                <form onsubmit="savePaymentConfig(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">URL Gambar QRIS (Link Gambar QR)</label>
+                        <input type="text" id="admin-qris-url" placeholder="https://contoh.com/qris.png" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Nama Bank</label>
+                            <input type="text" id="admin-bank-name" placeholder="Mandiri / BCA" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Nomor Rekening</label>
+                            <input type="text" id="admin-bank-acc" placeholder="123456789" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Atas Nama Rekening</label>
+                            <input type="text" id="admin-bank-holder" placeholder="Yayasan Sahabat Ibu" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        </div>
+                    </div>
+                    <button type="submit" class="bg-sahabatPink text-sahabatBlue font-bold px-6 py-3 rounded-xl text-sm shadow">Simpan Pengaturan Pembayaran</button>
+                </form>
+            </div>
+
+            <!-- PANE 7: DATABASE MEMBER -->
+            <div id="cms-pane-leads" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 hidden space-y-6">
+                <h3 class="text-lg font-bold text-sahabatPink border-b border-slate-700 pb-3">Database Member & Atur Status Affiliator</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-slate-400 uppercase text-xs">
+                                <th class="pb-2">Nama</th>
+                                <th class="pb-2">Email</th>
+                                <th class="pb-2">WhatsApp</th>
+                                <th class="pb-2">Role / Status</th>
+                                <th class="pb-2">Aksi Ubah Role</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-leads-tbody" class="divide-y divide-slate-700/50"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL: LOGIN ADMIN -->
+    <div id="modal-admin-login" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 md:p-8 relative shadow-2xl text-slate-100">
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-sahabatPink text-sahabatBlue rounded-full flex items-center justify-center text-xl mx-auto mb-3 font-bold"><i class="fa-solid fa-lock"></i></div>
+                <h3 class="font-bold text-xl text-white">Login Admin CMS</h3>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Username Admin</label>
+                    <input type="text" id="admin-user-input" required placeholder="saktioctavia / aisfarida" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Password</label>
+                    <input type="password" id="admin-pass-input" required placeholder="••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white">
+                </div>
+                <button type="submit" class="w-full bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold py-3 rounded-xl transition shadow">Masuk ke Panel Admin</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL 1: DETAIL KELAS -->
+    <div id="modal-class-detail" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 relative shadow-xl space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeClassDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div id="detail-class-poster-box" class="w-full h-48 rounded-2xl bg-slate-100 overflow-hidden flex items-center justify-center text-slate-400">
+                <i class="fa-solid fa-image text-3xl"></i>
+            </div>
+            <div>
+                <span id="detail-class-date" class="text-xs font-bold text-sahabatPink uppercase tracking-wider">Tanggal Webinar</span>
+                <h3 id="detail-class-title" class="text-2xl font-bold text-sahabatBlue mt-1">Judul Kelas Webinar</h3>
+                <p id="detail-class-speaker" class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-chalkboard-user mr-1"></i> Pemateri: -</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 text-sm space-y-2 text-slate-700">
+                <h4 class="font-bold text-sahabatBlue">Penjelasan & Materi Kelas:</h4>
+                <p id="detail-class-desc-text">Deskripsi lengkap kelas dari admin.</p>
+            </div>
+            <div class="bg-pink-50 border border-pink-200 p-4 rounded-2xl flex items-center justify-between">
+                <div>
+                    <span class="text-xs text-pink-600 font-bold uppercase tracking-wider block" id="detail-discount-label">Diskon Spesial Hari Ini!</span>
+                    <div class="flex items-center space-x-2 mt-0.5">
+                        <span id="detail-class-price-old" class="text-sm text-slate-400 line-through">Rp 0</span>
+                        <h4 id="detail-class-price" class="text-xl font-extrabold text-sahabatBlue">Rp 0</h4>
+                    </div>
+                </div>
+                <button onclick="proceedToRegister()" class="bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold px-6 py-3 rounded-xl transition shadow text-sm">Ambil Kelas Ini &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 2: REGISTER & LOGIN -->
+    <div id="modal-login" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 relative shadow-xl">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <div class="flex border-b border-slate-200 mb-6">
+                <button onclick="switchAuthTab('reg')" id="auth-tab-reg" class="flex-1 pb-3 font-bold text-sm text-sahabatBlue border-b-2 border-sahabatBlue transition">Buat Akun / Daftar</button>
+                <button onclick="switchAuthTab('log')" id="auth-tab-log" class="flex-1 pb-3 font-bold text-sm text-slate-400 transition">Sudah Punya Akun (Login)</button>
+            </div>
+
+            <!-- Form Register -->
+            <form id="form-register" onsubmit="handleRegister(event)" class="space-y-4">
+                <input type="hidden" id="reg-class-id">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap</label>
+                    <input type="text" id="reg-name" required placeholder="Nama Anda" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Alamat Email</label>
+                    <input type="email" id="reg-email" required placeholder="email@domain.com" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nomor WhatsApp</label>
+                    <input type="text" id="reg-wa" required placeholder="08xxxxxxxxxx" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Password Akun</label>
+                    <input type="password" id="reg-pass" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <button type="submit" class="w-full bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold py-3 rounded-xl transition shadow">Daftar & Lanjut Pembayaran &rarr;</button>
+            </form>
+
+            <!-- Form Login -->
+            <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4 hidden">
+                <input type="hidden" id="log-class-id">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Alamat Email / WhatsApp</label>
+                    <input type="text" id="log-email" required placeholder="email atau nomor WA" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Password</label>
+                    <input type="password" id="log-pass" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <button type="submit" class="w-full bg-sahabatBlue hover:bg-blue-900 text-white font-bold py-3 rounded-xl transition shadow">Masuk & Lanjut Pembayaran</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL 3: PEMBAYARAN -->
+    <div id="modal-payment" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 relative shadow-xl space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center">
+                <span class="bg-amber-100 text-amber-700 font-bold text-xs px-3 py-1 rounded-full uppercase">Selesaikan Pembayaran</span>
+                <h3 class="font-bold text-2xl text-sahabatBlue mt-2">Metode Pembayaran</h3>
+                <p id="pay-class-summary" class="text-xs text-slate-500 mt-1">Total: Rp 150.000</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center space-y-3">
+                    <p class="font-bold text-sm text-sahabatBlue">Scan QRIS (Semua E-Wallet / M-Banking)</p>
+                    <div id="pay-qris-container" class="w-40 h-40 bg-white mx-auto border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 overflow-hidden shadow-sm">
+                        <i class="fa-solid fa-qrcode text-6xl text-slate-700"></i>
+                    </div>
+                </div>
+
+                <div id="pay-bank-container" class="p-4 bg-blue-50 rounded-2xl border border-blue-100 text-xs space-y-1 text-blue-900">
+                    <p class="font-bold" id="pay-bank-name">Transfer Bank</p>
+                    <p class="font-mono text-sm font-bold" id="pay-bank-acc">123-00-9876543-2</p>
+                    <p id="pay-bank-holder">a.n Yayasan Sahabat Ibu Berdaya</p>
+                </div>
+
+                <div class="p-4 bg-pink-50 rounded-2xl border border-pink-200 space-y-2">
+                    <label class="block text-xs font-bold text-sahabatBlue"><i class="fa-solid fa-upload mr-1"></i> Upload Bukti Pembayaran / Transfer (Wajib)</label>
+                    <input type="file" id="pay-proof-file" accept="image/*" class="w-full text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-sahabatPink file:text-sahabatBlue hover:file:bg-pink-300">
+                    <p class="text-[10px] text-slate-500">Format gambar (JPG, PNG, atau Screenshot)</p>
+                </div>
+            </div>
+
+            <button onclick="confirmPaymentSuccess()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow text-sm">
+                <i class="fa-solid fa-circle-check mr-2"></i> Konfirmasi & Kirim Bukti Bayar
+            </button>
+        </div>
+    </div>
+
+
+    <!-- MODAL 4: BERHASIL CHECKOUT -->
+    <div id="modal-success-checkout" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 relative shadow-xl text-center space-y-6">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto shadow"><i class="fa-solid fa-check"></i></div>
+            <div>
+                <h3 class="font-bold text-2xl text-sahabatBlue">Checkout Berhasil! 🎉</h3>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">Bukti pembayaran telah direkam. Silakan kirimkan konfirmasi ke WhatsApp Admin untuk validasi.</p>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs text-left">
+                <p id="success-notif-wa-text" class="font-mono bg-white p-2 rounded border border-slate-100 text-emerald-700 font-semibold"></p>
+            </div>
+
+            <div class="space-y-3">
+                <a id="success-wa-redirect-btn" href="#" target="_blank" class="w-full block bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition shadow text-sm">
+                    <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Kirim Konfirmasi ke WA Admin
+                </a>
+                <button onclick="finishCheckoutProcess()" class="w-full bg-sahabatBlue hover:bg-blue-900 text-white font-semibold py-3 rounded-xl transition text-sm">
+                    Masuk ke Member Area Saya
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function escAttr(str) {
+            return String(str || '').replace(/"/g, '&quot;');
+        }
+
+        const DEFAULT_LOGO_URL = 'https://i.ibb.co.com/8gMDYZ5F/Desain-tanpa-judul-20261113-151313-0000.png';
+
+        let savedBranding = JSON.parse(localStorage.getItem('si_branding'));
+        if (savedBranding && savedBranding.logoUrl && savedBranding.logoUrl.includes('sahabatibu.netlify.app/logo')) {
+            savedBranding.logoUrl = DEFAULT_LOGO_URL;
+            localStorage.setItem('si_branding', JSON.stringify(savedBranding));
+        }
+
+        let siteBranding = savedBranding || {
+            name: 'Sahabat Ibu',
+            tagline: 'Menjadi Sahabat Ibu, Menemani Sepenuh Hati',
+            logoUrl: DEFAULT_LOGO_URL,
+            socWa: 'https://wa.me/6289655873149',
+            socIg: 'https://instagram.com/sahabatibu_ind',
+            socTt: 'https://tiktok.com'
+        };
+
+        let sitePayment = JSON.parse(localStorage.getItem('si_payment')) || {
+            qrisUrl: '',
+            bankName: 'Mandiri',
+            bankAcc: '123-00-9876543-2',
+            bankHolder: 'Yayasan Sahabat Ibu Berdaya'
+        };
+
+        let siteGlobalTexts = Object.assign({
+            navHome: 'Beranda',
+            navClasses: 'Kelas & Webinar',
+            navMember: 'Member Area',
+            navAdmin: 'Admin CMS',
+
+            katalogTitle: 'Katalog Kelas & Webinar Sahabat Ibu',
+            katalogDesc: 'Beli kelas untuk mulai bergabung menjadi member.',
+
+            footerAbout: 'Sahabat Ibu adalah ruang edukasi, berbagi, dan bertumbuh bagi perempuan, ibu, serta keluarga dalam menjalani setiap fase kehidupan.',
+            footerNavHeading: 'Navigasi Cepat',
+            footerContactHeading: 'Kontak & Dukungan',
+            footerWaText: 'WhatsApp Admin: 089655873149',
+            footerEmailText: 'Email: sahabatibu72@gmail.com',
+            footerCopyright: '© 2026 Sahabat Ibu. Menjadi Sahabat Ibu, Menemani Sepenuh Hati. All rights reserved.',
+
+            heroBtn1: 'Gabung & Pilih Kelas',
+            heroBtn2: 'Masuk Member Area',
+            consBtn: 'Hubungi Mentor Sekarang',
+            commBtn: 'Masuk Grup Komunitas',
+            affBtn: 'Daftar Affiliator Sekarang',
+
+            docBadge1: 'Webinar Parenting Batch 1',
+            docBadge2: 'Kelas Personal Branding Nakes',
+            docBadge3: 'Bedah Kasus MPASI & KB',
+
+            testi1Text: '"Materinya sangat daging dan aplikatif sekali untuk praktik di lapangan maupun untuk edukasi digital."',
+            testi1Name: 'Bidan Rina, S.Tr.Keb',
+            testi1Role: 'Peserta Webinar Nakes',
+            testi2Text: '"Sistem afiliasinya sangat mudah dipahami dan komisinya beneran masuk dan transparan banget!"',
+            testi2Name: 'Ibu Siti Aminah',
+            testi2Role: 'Affiliator Sahabat Ibu',
+            testi3Text: '"Ilmu parentingnya sangat membantu saya mendampingi tumbuh kembang anak pertama saya."',
+            testi3Name: 'Ibu Dian Puspita',
+            testi3Role: 'Ibu Rumah Tangga',
+
+            aff1Title: 'Dibimbing dari Nol Sampai Menghasilkan Cuan',
+            aff1Desc: 'Disediakan modul pemasaran, materi carousel siap post, dan strategi closing harian tanpa pusing.',
+            aff2Title: 'Berbagai Benefit & Komisi Berjenjang',
+            aff2Desc: 'Nikmati komisi penjualan Level 1 (20%) dan Level 2 (5%), reward bulanan, serta akses kelas gratis selamanya.',
+
+            memberDomain: 'my.affiliatesahabatibu.id',
+            memberGreeting: 'Assalamualaikum Warahmatullahi Wabarakatuh ^^',
+            memberWelcomeBadge: 'Selamat Datang di Member Area 😊',
+            memberWelcomeTitle: 'Akses Kelas & Grup Webinar Anda',
+            memberRule1: '1. Memulai dengan berdoa agar diberikan kemudahan, pemahaman dan ilmu bermanfaat.',
+            memberRule2: '2. Usahakan tidak multitasking saat belajar, karena belajar adalah aktivitas yang membutuhkan fokus.',
+            memberRule3: '3. Tidak memberikan apalagi menyebarkan akses kepada selain peserta yang terdaftar resmi. 😊'
+        }, JSON.parse(localStorage.getItem('si_global_texts')) || {});
+
+        let landingSections = JSON.parse(localStorage.getItem('si_landing_sections')) || [
+            { id: 'hero', title: 'Sahabat Ibu - Menjadi Sahabat Ibu, Menemani Sepenuh Hati', badge: 'Platform Komunitas & Edukasi Digital', desc: 'Platform khusus tenaga kesehatan & perempuan untuk berbagi edukasi, akses webinar bulanan berkualitas, dan nikmati sistem afiliasi berjenjang yang transparan.', bgType: 'gradient', videoUrl: '', imageUrl: '', active: true },
+            { id: 'classes', title: 'Kelas & Webinar Eksklusif', badge: 'Pilihan Terbaik', desc: 'Pilih kelas impianmu, pelajari ilmunya, dan dapatkan hak aksesnya.', bgType: 'white', videoUrl: '', imageUrl: '', active: true },
+            { id: 'doc', title: 'Dokumentasi Kelas & Webinar', badge: 'Momen Kebersamaan', desc: 'Keseruan interaksi dan antusiasme peserta dalam setiap sesi belajar online.', bgType: 'light', videoUrl: '', imageUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80', active: true },
+            { id: 'testi', title: 'Testimoni Peserta Berdaya', badge: 'Apa Kata Mereka', desc: 'Cerita sukses para nakes dan ibu yang telah bergabung.', bgType: 'white', videoUrl: '', imageUrl: '', active: true },
+            { id: 'cons', title: 'Pendampingan & Konsultasi Eksklusif', badge: 'Diskusi Langsung', desc: 'Bingung memulai langkah edukasi atau butuh diskusi seputar kesehatan ibu & anak? Tim mentor dan nakes kami siap mendampingi perjalananmu secara personal.', bgType: 'pink', videoUrl: '', imageUrl: '', active: true },
+            { id: 'comm', title: 'Join Grup Komunitas Sahabat Ibu', badge: 'Wadah Saling Support', desc: 'Berbagi insight pengalaman menjadi perempuan dan ibu. Mulai dari anak, menikah, MPASI, ibu melahirkan sampai KB dalam satu lingkaran suportif.', bgType: 'blue', videoUrl: '', imageUrl: '', active: true },
+            { id: 'aff', title: 'Join Afiliasi / Affiliate Sahabat Ibu', badge: 'Peluang Usaha Digital', desc: 'Dapatkan penghasilan tambahan dan bangun aset digital bersama ribuan perempuan hebat lainnya.', bgType: 'white', videoUrl: '', imageUrl: '', active: true }
+        ];
+
+        let memberMenus = JSON.parse(localStorage.getItem('si_member_menus')) || [
+            { id: 'kelas', title: 'Akses Kelasku', submenu: 'Grup WA & Materi Webinar', icon: 'fa-solid fa-download', roleRequired: 'all', contentHtml: 'custom_kelas', customDesc: '' },
+            { id: 'afiliasi', title: 'Menu Afiliasi', submenu: 'Link Referral & Komisi', icon: 'fa-solid fa-bullhorn', roleRequired: 'affiliate', contentHtml: 'custom_afiliasi', customDesc: '' },
+            { id: 'dashboard', title: 'Dashboard', submenu: 'Statistik Komisi MLM', icon: 'fa-solid fa-chart-line', roleRequired: 'affiliate', contentHtml: 'custom_dashboard', customDesc: '' },
+            { id: 'leaderboard', title: 'Leaderboard', submenu: 'Peringkat Affiliator', icon: 'fa-solid fa-trophy', roleRequired: 'affiliate', contentHtml: 'custom_leaderboard', customDesc: '' },
+            { id: 'profile', title: 'Profile & Bank', submenu: 'Rekening Pencairan Komisi', icon: 'fa-solid fa-user', roleRequired: 'affiliate', contentHtml: 'custom_profile', customDesc: '' }
+        ];
+
+        let classesData = JSON.parse(localStorage.getItem('si_classes')) || [
+            { id: 1, title: 'Strategi Nakes Membangun Personal Branding Digital', price: 150000, discPrice: 99000, date: '10 November 2026', speaker: 'Dr. Rina Puspita', poster: '', desc: 'Pelajari cara nakes membangun personal branding digital secara profesional.', waGroup: 'https://chat.whatsapp.com/webinar1_default' },
+            { id: 2, title: 'Mastering Affiliate Marketing untuk Tenaga Kesehatan', price: 200000, discPrice: 135000, date: '22 November 2026', speaker: 'Bidan Siska Meliana', poster: '', desc: 'Teknik rahasia sukses affiliate marketing khusus nakes & perempuan.', waGroup: 'https://chat.whatsapp.com/webinar2_default' },
+            { id: 3, title: 'Kelas Parenting & Kesehatan Ibu Hamil Era Modern', price: 125000, discPrice: 85000, date: '05 Desember 2026', speaker: 'Ns. Dewi Anggraini', poster: '', desc: 'Panduan lengkap kesehatan ibu hamil dan parenting masa kini.', waGroup: 'https://chat.whatsapp.com/webinar3_default' }
+        ];
+
+        let membersData = JSON.parse(localStorage.getItem('si_members')) || [
+            { id: 'm1', name: 'Siti Aminah', email: 'siti@gmail.com', wa: '081211112222', pass: '123456', role: 'affiliate', upline: null, bank: { name: 'BCA', no: '12345678', accName: 'Siti Aminah' }, purchasedClasses: [1, 2] }
+        ];
+
+        let currentMemberId = localStorage.getItem('si_current_member') || null;
+        let isAdminLoggedIn = localStorage.getItem('si_admin_logged') === 'true';
+        let activeReferralUpline = null;
+        let activeSelectedClassId = null;
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get('ref');
+            const targetClassId = urlParams.get('class');
+
+            if (ref) {
+                activeReferralUpline = ref;
+                localStorage.setItem('si_ref', ref);
+            } else {
+                activeReferralUpline = localStorage.getItem('si_ref') || null;
+            }
+
+            if (window.location.pathname.includes('admin') || isAdminLoggedIn) {
+                if (isAdminLoggedIn) showAdminPanel();
+                else openAdminLoginModal();
+            } else if (currentMemberId) {
+                showMemberArea();
+            } else {
+                showPublicArea();
+            }
+
+            renderBranding();
+            renderGlobalTexts();
+            renderClasses();
+            renderAdminData();
+
+            if (targetClassId && !isAdminLoggedIn) {
+                openClassDetail(parseInt(targetClassId));
+            }
+        };
+
+        function renderBranding() {
+            document.title = `${siteBranding.name} - ${siteBranding.tagline}`;
+            document.getElementById('nav-brand-title').innerText = siteBranding.name;
+            document.getElementById('nav-brand-subtitle').innerText = siteBranding.tagline;
+            document.getElementById('footer-brand-title').innerText = siteBranding.name;
+
+            const logoContainer = document.getElementById('nav-logo-container');
+            const footerLogoContainer = document.getElementById('footer-logo-container');
+            const memberLogoBox = document.getElementById('member-sidebar-logo-box');
+
+            if (siteBranding.logoUrl) {
+                logoContainer.className = "w-11 h-11 flex items-center justify-center overflow-hidden shrink-0";
+                logoContainer.innerHTML = `<img src="${siteBranding.logoUrl}" alt="Logo" class="w-full h-full object-contain">`;
+
+                if (footerLogoContainer) {
+                    footerLogoContainer.className = "w-9 h-9 flex items-center justify-center overflow-hidden shrink-0";
+                    footerLogoContainer.innerHTML = `<img src="${siteBranding.logoUrl}" alt="Logo" class="w-full h-full object-contain">`;
+                }
+
+                memberLogoBox.className = "w-16 h-16 flex items-center justify-center mx-auto mb-3 overflow-hidden";
+                memberLogoBox.innerHTML = `<img src="${siteBranding.logoUrl}" alt="Logo" class="w-full h-full object-contain">`;
+            } else {
+                logoContainer.className = "w-10 h-10 rounded-full bg-sahabatPink flex items-center justify-center text-white font-bold text-xl shadow overflow-hidden shrink-0";
+                logoContainer.innerHTML = `<span class="font-bold text-white text-base">SI</span>`;
+
+                if (footerLogoContainer) {
+                    footerLogoContainer.className = "w-8 h-8 rounded-full bg-sahabatPink flex items-center justify-center text-white font-bold text-sm overflow-hidden shrink-0";
+                    footerLogoContainer.innerHTML = `<span class="font-bold text-white text-sm">SI</span>`;
+                }
+
+                memberLogoBox.className = "w-16 h-16 rounded-full bg-gradient-to-tr from-sahabatPink to-blue-400 flex items-center justify-center text-white font-bold text-2xl mx-auto mb-3 shadow-md border-4 border-pink-50 overflow-hidden";
+                memberLogoBox.innerHTML = `<span class="font-bold text-white text-xl">SI</span>`;
+            }
+
+            document.getElementById('admin-brand-name').value = siteBranding.name;
+            document.getElementById('admin-brand-tagline').value = siteBranding.tagline;
+            document.getElementById('admin-logo-url').value = siteBranding.logoUrl;
+            document.getElementById('admin-soc-wa').value = siteBranding.socWa;
+            document.getElementById('admin-soc-ig').value = siteBranding.socIg;
+            document.getElementById('admin-soc-tt').value = siteBranding.socTt;
+
+            document.getElementById('admin-qris-url').value = sitePayment.qrisUrl;
+            document.getElementById('admin-bank-name').value = sitePayment.bankName;
+            document.getElementById('admin-bank-acc').value = sitePayment.bankAcc;
+            document.getElementById('admin-bank-holder').value = sitePayment.bankHolder;
+        }
+
+        function renderGlobalTexts() {
+            if(document.getElementById('nav-menu-home')) document.getElementById('nav-menu-home').innerText = siteGlobalTexts.navHome;
+            if(document.getElementById('nav-menu-classes')) document.getElementById('nav-menu-classes').innerText = siteGlobalTexts.navClasses;
+            if(document.getElementById('nav-menu-member')) document.getElementById('nav-menu-member').innerText = siteGlobalTexts.navMember;
+            if(document.getElementById('nav-menu-member-mobile')) document.getElementById('nav-menu-member-mobile').innerText = siteGlobalTexts.navMember;
+            if(document.getElementById('nav-menu-admin')) document.getElementById('nav-menu-admin').innerText = siteGlobalTexts.navAdmin;
+
+            if(document.getElementById('katalog-title')) document.getElementById('katalog-title').innerText = siteGlobalTexts.katalogTitle;
+            if(document.getElementById('katalog-desc')) document.getElementById('katalog-desc').innerText = siteGlobalTexts.katalogDesc;
+
+            if(document.getElementById('footer-desc')) document.getElementById('footer-desc').innerText = siteGlobalTexts.footerAbout;
+            if(document.getElementById('footer-nav-heading')) document.getElementById('footer-nav-heading').innerText = siteGlobalTexts.footerNavHeading;
+            if(document.getElementById('footer-link-home')) document.getElementById('footer-link-home').innerText = siteGlobalTexts.navHome;
+            if(document.getElementById('footer-link-classes')) document.getElementById('footer-link-classes').innerText = siteGlobalTexts.navClasses;
+            if(document.getElementById('footer-link-member')) document.getElementById('footer-link-member').innerText = siteGlobalTexts.navMember;
+            if(document.getElementById('footer-contact-heading')) document.getElementById('footer-contact-heading').innerText = siteGlobalTexts.footerContactHeading;
+            if(document.getElementById('site-contact-wa')) document.getElementById('site-contact-wa').innerText = siteGlobalTexts.footerWaText;
+            if(document.getElementById('site-contact-email')) document.getElementById('site-contact-email').innerText = siteGlobalTexts.footerEmailText;
+            if(document.getElementById('footer-copyright')) document.getElementById('footer-copyright').innerText = siteGlobalTexts.footerCopyright;
+
+            if(document.getElementById('member-domain-title')) document.getElementById('member-domain-title').innerText = siteGlobalTexts.memberDomain;
+            if(document.getElementById('mobile-member-domain')) document.getElementById('mobile-member-domain').innerText = siteGlobalTexts.memberDomain;
+            if(document.getElementById('member-greeting-text')) document.getElementById('member-greeting-text').innerText = siteGlobalTexts.memberGreeting;
+
+            Object.keys(siteGlobalTexts).forEach(k => {
+                if(document.getElementById('gt-' + k)) {
+                    document.getElementById('gt-' + k).value = siteGlobalTexts[k];
+                }
+            });
+
+            renderLandingSections();
+        }
+
+        function saveGlobalTexts(event) {
+            event.preventDefault();
+            Object.keys(siteGlobalTexts).forEach(k => {
+                if(document.getElementById('gt-' + k)) {
+                    siteGlobalTexts[k] = document.getElementById('gt-' + k).value;
+                }
+            });
+            localStorage.setItem('si_global_texts', JSON.stringify(siteGlobalTexts));
+            renderGlobalTexts();
+            alert('Semua teks, sub-penjelasan, dan footer berhasil disimpan!');
+        }
+
+        function renderLandingSections() {
+            let html = '';
+            landingSections.forEach(sec => {
+                if (!sec.active) return;
+
+                if (sec.id === 'hero') {
+                    html += `
+                        <div id="sec-hero" class="bg-gradient-to-r from-sahabatBlue to-blue-900 text-white py-16 px-4">
+                            <div class="max-w-4xl mx-auto text-center space-y-6">
+                                <span class="bg-sahabatPink/20 text-pink-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-pink-400/30">${sec.badge}</span>
+                                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight">${sec.title}</h2>
+                                <p class="text-slate-200 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">${sec.desc}</p>
+                                
+                                <div class="flex justify-center items-center gap-4 pt-2">
+                                    <a href="${siteBranding.socWa}" target="_blank" class="w-10 h-10 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center transition shadow text-lg"><i class="fa-brands fa-whatsapp"></i></a>
+                                    <a href="${siteBranding.socIg}" target="_blank" class="w-10 h-10 rounded-full bg-pink-600 hover:bg-pink-700 text-white flex items-center justify-center transition shadow text-lg"><i class="fa-brands fa-instagram"></i></a>
+                                    <a href="${siteBranding.socTt}" target="_blank" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-black text-white flex items-center justify-center transition shadow text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                                    <button onclick="switchMainTab('classes')" class="bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold px-8 py-3.5 rounded-full shadow-lg transition">${siteGlobalTexts.heroBtn1}</button>
+                                    <button onclick="checkAuthDashboard()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3.5 rounded-full border border-white/30 transition">${siteGlobalTexts.heroBtn2}</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (sec.id === 'classes') {
+                    html += `
+                        <div id="sec-classes" class="py-16 max-w-6xl mx-auto px-4">
+                            <div class="text-center mb-12">
+                                <span class="text-sahabatPink font-bold text-xs uppercase tracking-wider">${sec.badge}</span>
+                                <h3 class="text-2xl md:text-3xl font-bold text-sahabatBlue mt-1">${sec.title}</h3>
+                                <p class="text-slate-600 text-sm mt-2">${sec.desc}</p>
+                            </div>
+                            <div id="home-classes-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+                        </div>
+                    `;
+                } else if (sec.id === 'doc') {
+                    const imgHtml = sec.imageUrl ? `<div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 max-w-3xl mx-auto mb-8"><img src="${sec.imageUrl}" class="w-full h-64 object-cover"></div>` : '';
+                    const vidHtml = sec.videoUrl ? `<div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 max-w-3xl mx-auto mb-8 aspect-video"><iframe src="${sec.videoUrl}" class="w-full h-full" allowfullscreen></iframe></div>` : '';
+                    html += `
+                        <div id="sec-documentation" class="bg-white py-16 px-4 border-y border-slate-100">
+                            <div class="max-w-6xl mx-auto">
+                                <div class="text-center mb-12">
+                                    <span class="text-sahabatPink font-bold text-xs uppercase tracking-wider">${sec.badge}</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-sahabatBlue mt-1">${sec.title}</h3>
+                                    <p class="text-slate-600 text-sm mt-2">${sec.desc}</p>
+                                </div>
+                                ${imgHtml}
+                                ${vidHtml}
+                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                                    <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-100 h-48 flex items-center justify-center text-slate-400 relative">
+                                        <i class="fa-solid fa-image text-3xl mb-2"></i>
+                                        <span class="absolute bottom-3 left-3 text-xs bg-black/60 text-white px-2.5 py-1 rounded-md">${siteGlobalTexts.docBadge1}</span>
+                                    </div>
+                                    <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-100 h-48 flex items-center justify-center text-slate-400 relative">
+                                        <i class="fa-solid fa-image text-3xl mb-2"></i>
+                                        <span class="absolute bottom-3 left-3 text-xs bg-black/60 text-white px-2.5 py-1 rounded-md">${siteGlobalTexts.docBadge2}</span>
+                                    </div>
+                                    <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-100 h-48 flex items-center justify-center text-slate-400 relative">
+                                        <i class="fa-solid fa-image text-3xl mb-2"></i>
+                                        <span class="absolute bottom-3 left-3 text-xs bg-black/60 text-white px-2.5 py-1 rounded-full">${siteGlobalTexts.docBadge3}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (sec.id === 'testi') {
+                    html += `
+                        <div id="sec-testimonials" class="py-16 max-w-6xl mx-auto px-4">
+                            <div class="text-center mb-12">
+                                <span class="text-sahabatPink font-bold text-xs uppercase tracking-wider">${sec.badge}</span>
+                                <h3 class="text-2xl md:text-3xl font-bold text-sahabatBlue mt-1">${sec.title}</h3>
+                                <p class="text-slate-600 text-sm mt-2">${sec.desc}</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+                                    <div class="text-sahabatGold text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                    <p class="text-slate-600 text-sm italic">${siteGlobalTexts.testi1Text}</p>
+                                    <div><h5 class="font-bold text-sahabatBlue text-sm">${siteGlobalTexts.testi1Name}</h5><p class="text-xs text-slate-400">${siteGlobalTexts.testi1Role}</p></div>
+                                </div>
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+                                    <div class="text-sahabatGold text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                    <p class="text-slate-600 text-sm italic">${siteGlobalTexts.testi2Text}</p>
+                                    <div><h5 class="font-bold text-sahabatBlue text-sm">${siteGlobalTexts.testi2Name}</h5><p class="text-xs text-slate-400">${siteGlobalTexts.testi2Role}</p></div>
+                                </div>
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+                                    <div class="text-sahabatGold text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                    <p class="text-slate-600 text-sm italic">${siteGlobalTexts.testi3Text}</p>
+                                    <div><h5 class="font-bold text-sahabatBlue text-sm">${siteGlobalTexts.testi3Name}</h5><p class="text-xs text-slate-400">${siteGlobalTexts.testi3Role}</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (sec.id === 'cons') {
+                    html += `
+                        <div id="sec-consultation" class="bg-sahabatPinkLight py-16 px-4">
+                            <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-pink-100 text-center space-y-6">
+                                <div class="w-16 h-16 bg-pink-100 text-sahabatPink rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-comments"></i></div>
+                                <span class="text-xs font-bold text-sahabatPink uppercase">${sec.badge}</span>
+                                <h3 class="text-2xl md:text-3xl font-bold text-sahabatBlue">${sec.title}</h3>
+                                <p class="text-slate-600 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">${sec.desc}</p>
+                                <a href="${siteBranding.socWa}" target="_blank" class="inline-block bg-sahabatBlue hover:bg-blue-900 text-white font-bold px-8 py-3.5 rounded-full text-sm shadow transition">${siteGlobalTexts.consBtn}</a>
+                            </div>
+                        </div>
+                    `;
+                } else if (sec.id === 'comm') {
+                    html += `
+                        <div id="sec-community" class="py-16 max-w-6xl mx-auto px-4">
+                            <div class="bg-gradient-to-r from-blue-900 to-sahabatBlue text-white rounded-3xl p-8 md:p-12 shadow-lg flex flex-col md:flex-row items-center justify-between gap-8">
+                                <div class="space-y-4 max-w-xl">
+                                    <span class="bg-sahabatPink/20 text-pink-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-pink-400/30">${sec.badge}</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold">${sec.title}</h3>
+                                    <p class="text-slate-200 text-sm leading-relaxed">${sec.desc}</p>
+                                </div>
+                                <a href="${siteBranding.socWa}" target="_blank" class="bg-sahabatPink hover:bg-pink-400 text-sahabatBlue font-bold px-8 py-4 rounded-2xl shadow-xl transition whitespace-nowrap flex items-center space-x-2">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i><span>${siteGlobalTexts.commBtn}</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                } else if (sec.id === 'aff') {
+                    html += `
+                        <div id="sec-affiliate" class="bg-white py-16 px-4 border-t border-slate-100">
+                            <div class="max-w-5xl mx-auto text-center space-y-8">
+                                <div>
+                                    <span class="text-sahabatPink font-bold text-xs uppercase tracking-wider">${sec.badge}</span>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-sahabatBlue mt-1">${sec.title}</h3>
+                                    <p class="text-slate-600 text-sm mt-2 max-w-xl mx-auto">${sec.desc}</p>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/60 flex items-start space-x-4">
+                                        <div class="w-10 h-10 bg-pink-100 text-sahabatPink rounded-xl flex items-center justify-center shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                        <div>
+                                            <h4 class="font-bold text-sahabatBlue text-base mb-1">${siteGlobalTexts.aff1Title}</h4>
+                                            <p class="text-slate-600 text-xs leading-relaxed">${siteGlobalTexts.aff1Desc}</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/60 flex items-start space-x-4">
+                                        <div class="w-10 h-10 bg-blue-100 text-sahabatBlue rounded-xl flex items-center justify-center shrink-0"><i class="fa-solid fa-gift"></i></div>
+                                        <div>
+                                            <h4 class="font-bold text-sahabatBlue text-base mb-1">${siteGlobalTexts.aff2Title}</h4>
+                                            <p class="text-slate-600 text-xs leading-relaxed">${siteGlobalTexts.aff2Desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button onclick="checkAuthDashboard()" class="bg-sahabatBlue hover:bg-blue-900 text-white font-bold px-8 py-3.5 rounded-full text-sm shadow transition">${siteGlobalTexts.affBtn}</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const cImgHtml = sec.imageUrl ? `<div class="rounded-2xl overflow-hidden max-w-xl mx-auto"><img src="${sec.imageUrl}" class="w-full h-auto object-cover"></div>` : '';
+                    const cVidHtml = sec.videoUrl ? `<div class="rounded-2xl overflow-hidden max-w-xl mx-auto aspect-video"><iframe src="${sec.videoUrl}" class="w-full h-full" allowfullscreen></iframe></div>` : '';
+                    html += `
+                        <div class="py-16 max-w-5xl mx-auto px-4 bg-white rounded-3xl my-8 shadow-sm border border-slate-100">
+                            <div class="text-center space-y-4">
+                                <span class="bg-pink-100 text-sahabatPink text-xs font-semibold px-3 py-1 rounded-full uppercase">${sec.badge}</span>
+                                <h3 class="text-2xl md:text-3xl font-bold text-sahabatBlue">${sec.title}</h3>
+                                <p class="text-slate-600 text-sm max-w-2xl mx-auto leading-relaxed">${sec.desc}</p>
+                                ${cImgHtml}
+                                ${cVidHtml}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            document.getElementById('dynamic-sections-wrapper').innerHTML = html;
+            renderClasses();
+        }
+
+        function saveBrandingContent(event) {
+            event.preventDefault();
+            siteBranding = {
+                name: document.getElementById('admin-brand-name').value,
+                tagline: document.getElementById('admin-brand-tagline').value,
+                logoUrl: document.getElementById('admin-logo-url').value.trim(),
+                socWa: document.getElementById('admin-soc-wa').value,
+                socIg: document.getElementById('admin-soc-ig').value,
+                socTt: document.getElementById('admin-soc-tt').value
+            };
+            localStorage.setItem('si_branding', JSON.stringify(siteBranding));
+            renderBranding();
+            alert('Nama Komunitas, Logo & Media Sosial berhasil disimpan!');
+        }
+
+        function savePaymentConfig(event) {
+            event.preventDefault();
+            sitePayment = {
+                qrisUrl: document.getElementById('admin-qris-url').value,
+                bankName: document.getElementById('admin-bank-name').value,
+                bankAcc: document.getElementById('admin-bank-acc').value,
+                bankHolder: document.getElementById('admin-bank-holder').value
+            };
+            localStorage.setItem('si_payment', JSON.stringify(sitePayment));
+            alert('Pengaturan QRIS & Bank berhasil disimpan!');
+        }
+
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.public-tab').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchMemberTab(tabId) {
+            document.querySelectorAll('.member-tab-content').forEach(el => el.classList.add('hidden'));
+            const targetTab = document.getElementById('m-tab-' + tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            memberMenus.forEach(m => {
+                const btn = document.getElementById('m-menu-' + m.id);
+                if(btn) {
+                    if (m.id === tabId) {
+                        btn.className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sahabatBlue bg-pink-50 font-bold transition text-left";
+                    } else {
+                        btn.className = "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition text-left";
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showPublicArea() {
+            document.getElementById('public-header').classList.remove('hidden');
+            document.getElementById('public-container').classList.remove('hidden');
+            document.getElementById('public-footer').classList.remove('hidden');
+            document.getElementById('member-area-wrapper').classList.add('hidden');
+            document.getElementById('admin-panel-wrapper').classList.add('hidden');
+            switchMainTab('home');
+        }
+
+        function showMemberArea() {
+            document.getElementById('public-header').classList.add('hidden');
+            document.getElementById('public-container').classList.add('hidden');
+            document.getElementById('public-footer').classList.add('hidden');
+            document.getElementById('admin-panel-wrapper').classList.add('hidden');
+            document.getElementById('member-area-wrapper').classList.remove('hidden');
+            
+            const member = membersData.find(m => m.id === currentMemberId);
+            if (member) {
+                document.getElementById('mobile-member-name').innerText = member.name;
+                const isAff = member.role === 'affiliate';
+                document.getElementById('member-role-badge').innerText = isAff ? 'Affiliate Partner' : 'Member Kelas';
+
+                let navHtml = '';
+                memberMenus.forEach(menu => {
+                    if (menu.roleRequired === 'affiliate' && !isAff) return;
+                    navHtml += `
+                        <button onclick="switchMemberTab('${menu.id}')" id="m-menu-${menu.id}" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition text-left">
+                            <i class="${menu.icon} w-5 text-sahabatPink"></i>
+                            <div>
+                                <div class="font-bold text-sm text-sahabatBlue">${menu.title}</div>
+                                <div class="text-[10px] text-slate-400">${menu.submenu}</div>
+                            </div>
+                        </button>
+                    `;
+                });
+
+                if (!isAff) {
+                    navHtml += `
+                        <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 mt-4 text-xs text-amber-800 space-y-2">
+                            <p class="font-bold"><i class="fa-solid fa-lock mr-1"></i> Menu Afiliasi Terkunci</p>
+                            <p>Upgrade status menjadi Affiliator untuk membuka akses menu afiliasi dan komisi berjenjang.</p>
+                        </div>
+                    `;
+                }
+
+                navHtml += `
+                    <button onclick="logoutMember()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition mt-6">
+                        <i class="fa-solid fa-right-from-bracket w-5"></i><span>Logout</span>
+                    </button>
+                `;
+                document.getElementById('member-sidebar-nav').innerHTML = navHtml;
+
+                let tabsContainerHtml = '';
+                memberMenus.forEach(menu => {
+                    if (menu.roleRequired === 'affiliate' && !isAff) return;
+
+                    let innerContent = '';
+                    if (menu.contentHtml === 'custom_kelas') {
+                        innerContent = `
+                            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+                                <div class="text-center mb-6">
+                                    <span class="text-xs font-bold text-sahabatPink uppercase tracking-wider">${siteGlobalTexts.memberWelcomeBadge}</span>
+                                    <h3 class="text-2xl font-bold text-sahabatBlue mt-1">${siteGlobalTexts.memberWelcomeTitle}</h3>
+                                </div>
+                                <div class="space-y-4 text-slate-700 text-sm max-w-2xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200/60 leading-relaxed mb-8">
+                                    <p>${siteGlobalTexts.memberRule1}</p>
+                                    <p>${siteGlobalTexts.memberRule2}</p>
+                                    <p>${siteGlobalTexts.memberRule3}</p>
+                                </div>
+                                <div id="member-purchased-classes-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                            </div>
+                        `;
+                    } else if (menu.contentHtml === 'custom_afiliasi') {
+                        innerContent = `
+                            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100 space-y-6">
+                                <div>
+                                    <h3 class="font-bold text-xl text-sahabatBlue mb-2"><i class="fa-solid fa-share-nodes text-sahabatPink mr-2"></i> Ambil Link Afiliasi Per Kelas</h3>
+                                    <p class="text-slate-600 text-sm">Pilih kelas webinar spesifik di bawah ini untuk mendapatkan link promosi khusus kelas tersebut beserta komisi afiliasinya.</p>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="member-class-affiliate-list"></div>
+                                <hr class="border-slate-100 my-4">
+                                <div>
+                                    <h4 class="font-bold text-base text-sahabatBlue mb-3">Daftar Jaringan Downline & Komisi MLM Anda</h4>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left text-sm">
+                                            <thead>
+                                                <tr class="border-b border-slate-200 text-slate-400 uppercase text-xs">
+                                                    <th class="pb-3">Nama Member</th>
+                                                    <th class="pb-3">Level MLM</th>
+                                                    <th class="pb-3">Kelas Dibeli</th>
+                                                    <th class="pb-3">Komisi Anda</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="downline-table-body" class="divide-y divide-slate-100"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (menu.contentHtml === 'custom_dashboard') {
+                        innerContent = `
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase">Total Komisi Terkumpul</p>
+                                    <h3 id="stat-commission" class="text-3xl font-extrabold text-sahabatBlue mt-2">Rp 0</h3>
+                                    <p class="text-xs text-emerald-600 mt-1"><i class="fa-solid fa-circle-check"></i> Siap dicairkan</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase">Downline Level 1</p>
+                                    <h3 id="stat-level1" class="text-3xl font-extrabold text-sahabatPink mt-2">0 Orang</h3>
+                                    <p class="text-xs text-slate-500 mt-1">Komisi 20%</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase">Downline Level 2</p>
+                                    <h3 id="stat-level2" class="text-3xl font-extrabold text-blue-500 mt-2">0 Orang</h3>
+                                    <p class="text-xs text-slate-500 mt-1">Komisi 5%</p>
+                                </div>
+                            </div>
+                        `;
+                    } else if (menu.contentHtml === 'custom_leaderboard') {
+                        innerContent = `
+                            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div class="w-12 h-12 bg-amber-100 text-sahabatGold rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-trophy"></i></div>
+                                    <div>
+                                        <h3 class="font-bold text-xl text-sahabatBlue">Leaderboard Affiliator Terbaik</h3>
+                                        <p class="text-xs text-slate-500">Peringkat penjualan kelas terbanyak bulan ini</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-4 bg-pink-50 rounded-2xl border border-pink-100">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="w-8 h-8 rounded-full bg-sahabatPink text-white font-bold flex items-center justify-center text-sm">1</span>
+                                            <div><h4 class="font-bold text-sahabatBlue text-sm">Bidan Rina, S.Tr.Keb</h4><p class="text-xs text-slate-500">Total Penjualan: 24 Kelas</p></div>
+                                        </div>
+                                        <span class="text-xs font-bold bg-pink-200 text-sahabatBlue px-3 py-1 rounded-full">Top #1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (menu.contentHtml === 'custom_profile') {
+                        innerContent = `
+                            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100 max-w-xl mx-auto">
+                                <h3 class="font-bold text-xl text-sahabatBlue mb-2">Profil & Rekening Pencairan Komisi</h3>
+                                <p class="text-slate-600 text-sm mb-6">Masukkan data rekening bank atas nama kamu sendiri agar transfer komisi lancar.</p>
+                                <form id="bank-form" onsubmit="saveBankAccount(event)" class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Bank</label>
+                                        <select id="bank-name" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                                            <option value="">Pilih Bank</option>
+                                            <option value="BCA">BCA</option>
+                                            <option value="Mandiri">Mandiri</option>
+                                            <option value="BNI">BNI</option>
+                                            <option value="BRI">BRI</option>
+                                            <option value="SeaBank">SeaBank</option>
+                                            <option value="Jago">Bank Jago</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nomor Rekening</label>
+                                        <input type="text" id="bank-acc-no" required placeholder="Contoh: 1234567890" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Pemilik Rekening (Sesuai KTP)</label>
+                                        <input type="text" id="bank-acc-name" required placeholder="Contoh: Siti Aminah, S.Tr.Keb" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sahabatBlue">
+                                    </div>
+                                    <button type="submit" class="w-full bg-sahabatBlue hover:bg-blue-900 text-white font-semibold py-3 rounded-xl transition shadow">Simpan Rekening Bank</button>
+                                </form>
+                            </div>
+                        `;
+                    } else {
+                        innerContent = `
+                            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 space-y-4">
+                                <span class="text-xs font-bold text-sahabatPink uppercase">${menu.submenu}</span>
+                                <h3 class="font-bold text-2xl text-sahabatBlue">${menu.title}</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed whitespace-pre-line">${menu.customDesc || 'Halaman kustom dinamis untuk menu ' + menu.title + '.'}</p>
+                            </div>
+                        `;
+                    }
+
+                    tabsContainerHtml += `
+                        <div id="m-tab-${menu.id}" class="member-tab-content space-y-6 ${menu.id !== 'kelas' ? 'hidden' : ''}">
+                            ${innerContent}
+                        </div>
+                    `;
+                });
+
+                document.getElementById('member-tabs-container').innerHTML = tabsContainerHtml;
+            }
+            renderMemberDashboard();
+            switchMemberTab('kelas');
+        }
+
+        function showAdminPanel() {
+            document.getElementById('public-header').classList.add('hidden');
+            document.getElementById('public-container').classList.add('hidden');
+            document.getElementById('public-footer').classList.add('hidden');
+            document.getElementById('member-area-wrapper').classList.add('hidden');
+            document.getElementById('admin-panel-wrapper').classList.remove('hidden');
+            renderAdminData();
+        }
+
+        function openAdminLoginModal() { document.getElementById('modal-admin-login').classList.remove('hidden'); }
+        function closeAdminLoginModal() { document.getElementById('modal-admin-login').classList.add('hidden'); }
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const u = document.getElementById('admin-user-input').value.trim();
+            const p = document.getElementById('admin-pass-input').value.trim();
+
+            if ((u === 'saktioctavia' && p === 'keberhasilan') || (u === 'aisfarida' && p === 'arkana1')) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('si_admin_logged', 'true');
+                closeAdminLoginModal();
+                window.history.pushState({}, '', '/admin');
+                showAdminPanel();
+                alert('Login Admin Berhasil!');
+            } else {
+                alert('Username atau Password Admin salah!');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('si_admin_logged');
+            window.history.pushState({}, '', '/');
+            showPublicArea();
+        }
+
+        function switchAdminCMS(tab) {
+            ['branding', 'landing', 'global', 'membercms', 'classes', 'payment', 'leads'].forEach(t => {
+                const pane = document.getElementById('cms-pane-' + t);
+                const btn = document.getElementById('cms-btn-' + t);
+                if (t === tab) {
+                    pane.classList.remove('hidden');
+                    btn.className = "px-5 py-2.5 font-semibold text-sm bg-sahabatPink text-sahabatBlue rounded-xl transition whitespace-nowrap";
+                } else {
+                    pane.classList.add('hidden');
+                    btn.className = "px-5 py-2.5 font-semibold text-sm bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition whitespace-nowrap";
+                }
+            });
+        }
+
+        function renderClasses() {
+            const homeHtml = classesData.map(c => {
+                const posterImg = c.poster ? `<img src="${c.poster}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-graduation-cap text-3xl"></i>`;
+                const discBadge = c.discPrice ? `<span class="absolute top-3 right-3 bg-pink-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">DISKON</span>` : '';
+                const priceDisplay = c.discPrice 
+                    ? `<div class="flex items-center space-x-2"><span class="text-xs text-slate-400 line-through">Rp ${c.price.toLocaleString('id-ID')}</span><span class="text-sahabatBlue font-extrabold text-base">Rp ${c.discPrice.toLocaleString('id-ID')}</span></div>`
+                    : `<span class="text-sahabatBlue font-extrabold text-base">Rp ${c.price.toLocaleString('id-ID')}</span>`;
+
+                return `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition">
+                        <div>
+                            <div class="h-44 bg-slate-100 flex items-center justify-center text-slate-400 relative overflow-hidden">
+                                ${posterImg}
+                                <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-sahabatBlue text-xs font-bold px-3 py-1 rounded-full shadow-sm">${c.date}</span>
+                                ${discBadge}
+                            </div>
+                            <div class="p-6">
+                                <h4 class="font-bold text-sahabatBlue text-base mb-2">${c.title}</h4>
+                                <p class="text-xs text-slate-500 mb-3"><i class="fa-solid fa-chalkboard-user mr-1"></i> Pemateri: ${c.speaker}</p>
+                                ${priceDisplay}
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="openClassDetail(${c.id})" class="w-full bg-sahabatBlue hover:bg-blue-900 text-white font-semibold py-2.5 rounded-xl text-sm transition">Lihat Detail & Daftar</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const homeList = document.getElementById('home-classes-list');
+            const fullList = document.getElementById('full-classes-list');
+            if(homeList) homeList.innerHTML = homeHtml;
+            if(fullList) fullList.innerHTML = homeHtml;
+        }
+
+        function openClassDetail(classId) {
+            activeSelectedClassId = classId;
+            const cls = classesData.find(c => c.id === classId);
+            if (!cls) return;
+
+            document.getElementById('detail-class-title').innerText = cls.title;
+            document.getElementById('detail-class-date').innerText = "Jadwal: " + cls.date;
+            document.getElementById('detail-class-speaker').innerHTML = `<i class="fa-solid fa-chalkboard-user mr-1"></i> Pemateri: ${cls.speaker}`;
+            document.getElementById('detail-class-desc-text').innerText = cls.desc || 'Belum ada penjelasan detail dari admin.';
+            
+            const effectivePrice = cls.discPrice || cls.price;
+            document.getElementById('detail-class-price').innerText = "Rp " + effectivePrice.toLocaleString('id-ID');
+            
+            if (cls.discPrice) {
+                document.getElementById('detail-class-price-old').innerText = "Rp " + cls.price.toLocaleString('id-ID');
+                document.getElementById('detail-class-price-old').classList.remove('hidden');
+                document.getElementById('detail-discount-label').innerText = "Diskon Spesial Hari Ini!";
+            } else {
+                document.getElementById('detail-class-price-old').classList.add('hidden');
+                document.getElementById('detail-discount-label').innerText = "Investasi Kelas";
+            }
+
+            const posterBox = document.getElementById('detail-class-poster-box');
+            if (cls.poster) {
+                posterBox.innerHTML = `<img src="${cls.poster}" class="w-full h-full object-cover">`;
+            } else {
+                posterBox.innerHTML = `<i class="fa-solid fa-graduation-cap text-3xl"></i>`;
+            }
+
+            document.getElementById('modal-class-detail').classList.remove('hidden');
+        }
+
+        function closeClassDetailModal() { document.getElementById('modal-class-detail').classList.add('hidden'); }
+
+        function proceedToRegister() {
+            closeClassDetailModal();
+            if (!currentMemberId) {
+                document.getElementById('reg-class-id').value = activeSelectedClassId;
+                document.getElementById('log-class-id').value = activeSelectedClassId;
+                document.getElementById('modal-login').classList.remove('hidden');
+            } else {
+                openPaymentModal(activeSelectedClassId);
+            }
+        }
+
+        function switchAuthTab(tab) {
+            if(tab === 'reg') {
+                document.getElementById('form-register').classList.remove('hidden');
+                document.getElementById('form-login').classList.add('hidden');
+                document.getElementById('auth-tab-reg').className = "flex-1 pb-3 font-bold text-sm text-sahabatBlue border-b-2 border-sahabatBlue transition";
+                document.getElementById('auth-tab-log').className = "flex-1 pb-3 font-bold text-sm text-slate-400 transition";
+            } else {
+                document.getElementById('form-register').classList.add('hidden');
+                document.getElementById('form-login').classList.remove('hidden');
+                document.getElementById('auth-tab-log').className = "flex-1 pb-3 font-bold text-sm text-sahabatBlue border-b-2 border-sahabatBlue transition";
+                document.getElementById('auth-tab-reg').className = "flex-1 pb-3 font-bold text-sm text-slate-400 transition";
+            }
+        }
+
+        function closeLoginModal() { document.getElementById('modal-login').classList.add('hidden'); }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const wa = document.getElementById('reg-wa').value;
+            const pass = document.getElementById('reg-pass').value;
+            const classId = parseInt(document.getElementById('reg-class-id').value);
+
+            let member = membersData.find(m => m.email === email || m.wa === wa);
+            if (!member) {
+                member = {
+                    id: 'm' + (membersData.length + 1),
+                    name: name,
+                    email: email,
+                    wa: wa,
+                    pass: pass,
+                    role: 'member',
+                    upline: activeReferralUpline || null,
+                    bank: null,
+                    purchasedClasses: []
+                };
+                membersData.push(member);
+            } else {
+                member.pass = pass;
+            }
+
+            localStorage.setItem('si_members', JSON.stringify(membersData));
+            currentMemberId = member.id;
+            localStorage.setItem('si_current_member', currentMemberId);
+
+            closeLoginModal();
+            openPaymentModal(classId);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const identifier = document.getElementById('log-email').value.trim();
+            const pass = document.getElementById('log-pass').value.trim();
+            const classId = parseInt(document.getElementById('log-class-id').value) || activeSelectedClassId;
+
+            const member = membersData.find(m => (m.email === identifier || m.wa === identifier) && m.pass === pass);
+            if (member) {
+                currentMemberId = member.id;
+                localStorage.setItem('si_current_member', currentMemberId);
+                closeLoginModal();
+                alert('Login Berhasil! Melanjutkan ke pembayaran kelas.');
+                openPaymentModal(classId);
+            } else {
+                alert('Email/WhatsApp atau Password salah!');
+            }
+        }
+
+        function openPaymentModal(classId) {
+            activeSelectedClassId = classId;
+            const cls = classesData.find(c => c.id === classId);
+            if (!cls) return;
+
+            const effPrice = cls.discPrice || cls.price;
+            document.getElementById('pay-class-summary').innerText = `Kelas: ${cls.title} | Total: Rp ${effPrice.toLocaleString('id-ID')}`;
+            
+            const qrisContainer = document.getElementById('pay-qris-container');
+            if (sitePayment.qrisUrl) {
+                qrisContainer.innerHTML = `<img src="${sitePayment.qrisUrl}" class="w-full h-full object-cover">`;
+            } else {
+                qrisContainer.innerHTML = `<i class="fa-solid fa-qrcode text-6xl text-slate-700"></i>`;
+            }
+
+            document.getElementById('pay-bank-name').innerText = `Transfer Bank ${sitePayment.bankName}`;
+            document.getElementById('pay-bank-acc').innerText = sitePayment.bankAcc;
+            document.getElementById('pay-bank-holder').innerText = `a.n ${sitePayment.bankHolder}`;
+
+            document.getElementById('modal-payment').classList.remove('hidden');
+        }
+
+        function closePaymentModal() { document.getElementById('modal-payment').classList.add('hidden'); }
+
+        function confirmPaymentSuccess() {
+            const proofFile = document.getElementById('pay-proof-file').files[0];
+            if (!proofFile) {
+                alert('Mohon upload gambar bukti pembayaran/transfer terlebih dahulu!');
+                return;
+            }
+
+            closePaymentModal();
+            const member = membersData.find(m => m.id === currentMemberId);
+            const cls = classesData.find(c => c.id === activeSelectedClassId);
+            const effPrice = cls.discPrice || cls.price;
+
+            if (member && cls) {
+                if (!member.purchasedClasses.includes(cls.id)) {
+                    member.purchasedClasses.push(cls.id);
+                    localStorage.setItem('si_members', JSON.stringify(membersData));
+                }
+            }
+
+            const notifText = `${member ? member.name : 'Peserta'} - Membeli Kelas: ${cls ? cls.title : 'Webinar'} - Rp ${effPrice.toLocaleString('id-ID')} (Bukti Transfer Terlampir)`;
+            document.getElementById('success-notif-wa-text').innerText = notifText;
+
+            const waLink = `https://wa.me/${siteBranding.socWa.replace(/[^0-9]/g,'') || '6289655873149'}?text=${encodeURIComponent(notifText)}`;
+            document.getElementById('success-wa-redirect-btn').href = waLink;
+
+            document.getElementById('modal-success-checkout').classList.remove('hidden');
+        }
+
+        function finishCheckoutProcess() {
+            document.getElementById('modal-success-checkout').classList.add('hidden');
+            showMemberArea();
+            renderAdminData();
+        }
+
+        function checkAuthDashboard() {
+            if (!currentMemberId) {
+                activeSelectedClassId = classesData[0].id;
+                document.getElementById('reg-class-id').value = activeSelectedClassId;
+                document.getElementById('log-class-id').value = activeSelectedClassId;
+                document.getElementById('modal-login').classList.remove('hidden');
+            } else {
+                showMemberArea();
+            }
+        }
+
+        function logoutMember() {
+            currentMemberId = null;
+            localStorage.removeItem('si_current_member');
+            showPublicArea();
+        }
+
+        function renderMemberDashboard() {
+            const member = membersData.find(m => m.id === currentMemberId);
+            if (!member) return;
+
+            const purchasedHtml = member.purchasedClasses.map(cId => {
+                const cls = classesData.find(c => c.id === cId);
+                if (!cls) return '';
+                const groupLink = cls.waGroup || siteBranding.socWa;
+                return `
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
+                        <div>
+                            <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Aktif</span>
+                            <h4 class="font-bold text-sahabatBlue text-sm mt-2">${cls.title}</h4>
+                            <p class="text-xs text-slate-500 mt-1">Pemateri: ${cls.speaker}</p>
+                        </div>
+                        <a href="${groupLink}" target="_blank" class="w-full block bg-emerald-600 hover:bg-emerald-700 text-white text-center py-2 rounded-xl text-xs font-semibold transition">
+                            <i class="fa-brands fa-whatsapp mr-1"></i> Masuk Grup WA Webinar Kelas Ini
+                        </a>
+                    </div>
+                `;
+            }).join('');
+
+            const purchasedListEl = document.getElementById('member-purchased-classes-list');
+            if(purchasedListEl) purchasedListEl.innerHTML = purchasedHtml || `<p class="col-span-2 text-center text-slate-400 text-xs py-6">Kamu belum membeli kelas. Pilih katalog kelas untuk mulai belajar.</p>`;
+
+            if (member.role === 'affiliate') {
+                const classAffiliateListEl = document.getElementById('member-class-affiliate-list');
+                if(classAffiliateListEl) {
+                    const classAffiliateHtml = classesData.map(cls => {
+                        const classRefLink = window.location.origin + window.location.pathname.replace('/admin','') + '?ref=' + member.id + '&class=' + cls.id;
+                        return `
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
+                                <div>
+                                    <span class="text-xs bg-pink-100 text-sahabatPink font-bold px-2.5 py-1 rounded-full">Rp ${(cls.discPrice || cls.price).toLocaleString('id-ID')}</span>
+                                    <h4 class="font-bold text-sahabatBlue text-sm mt-2">${cls.title}</h4>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="text" readonly value="${classRefLink}" id="ref-class-${cls.id}" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-600 focus:outline-none">
+                                    <button onclick="copyClassRef(${cls.id})" class="bg-sahabatBlue hover:bg-blue-900 text-white px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap"><i class="fa-solid fa-copy"></i> Salin</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    classAffiliateListEl.innerHTML = classAffiliateHtml;
+                }
+
+                const level1Members = membersData.filter(m => m.upline === member.id);
+                const level1Ids = level1Members.map(m => m.id);
+                const level2Members = membersData.filter(m => level1Ids.includes(m.upline));
+
+                if(document.getElementById('stat-level1')) document.getElementById('stat-level1').innerText = level1Members.length + ' Orang';
+                if(document.getElementById('stat-level2')) document.getElementById('stat-level2').innerText = level2Members.length + ' Orang';
+
+                let totalComm = 0;
+                let downlineTableHtml = '';
+
+                level1Members.forEach(l1 => {
+                    l1.purchasedClasses.forEach(cId => {
+                        const cls = classesData.find(c => c.id === cId);
+                        if (cls) {
+                            const comm = (cls.discPrice || cls.price) * 0.20;
+                            totalComm += comm;
+                            downlineTableHtml += `
+                                <tr>
+                                    <td class="py-3 font-semibold text-slate-700">${l1.name}</td>
+                                    <td class="py-3"><span class="bg-pink-100 text-sahabatPink text-xs px-2.5 py-1 rounded-full font-bold">Level 1 (20%)</span></td>
+                                    <td class="py-3 text-slate-600">${cls.title}</td>
+                                    <td class="py-3 font-extrabold text-emerald-600">+Rp ${comm.toLocaleString('id-ID')}</td>
+                                </tr>
+                            `;
+                        }
+                    });
+                });
+
+                level2Members.forEach(l2 => {
+                    l2.purchasedClasses.forEach(cId => {
+                        const cls = classesData.find(c => c.id === cId);
+                        if (cls) {
+                            const comm = (cls.discPrice || cls.price) * 0.05;
+                            totalComm += comm;
+                            downlineTableHtml += `
+                                <tr>
+                                    <td class="py-3 font-semibold text-slate-700">${l2.name}</td>
+                                    <td class="py-3"><span class="bg-blue-100 text-sahabatBlue text-xs px-2.5 py-1 rounded-full font-bold">Level 2 (5%)</span></td>
+                                    <td class="py-3 text-slate-600">${cls.title}</td>
+                                    <td class="py-3 font-extrabold text-emerald-600">+Rp ${comm.toLocaleString('id-ID')}</td>
+                                </tr>
+                            `;
+                        }
+                    });
+                });
+
+                if(document.getElementById('stat-commission')) document.getElementById('stat-commission').innerText = 'Rp ' + totalComm.toLocaleString('id-ID');
+                if(document.getElementById('downline-table-body')) document.getElementById('downline-table-body').innerHTML = downlineTableHtml || `<tr><td colspan="4" class="py-6 text-center text-slate-400 text-xs">Belum ada downline.</td></tr>`;
+            }
+
+            if (member.bank && document.getElementById('bank-name')) {
+                document.getElementById('bank-name').value = member.bank.name;
+                document.getElementById('bank-acc-no').value = member.bank.no;
+                document.getElementById('bank-acc-name').value = member.bank.accName;
+            }
+        }
+
+        function copyClassRef(classId) {
+            const copyText = document.getElementById('ref-class-' + classId);
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+            alert('Link afiliasi berhasil disalin!');
+        }
+
+        function saveBankAccount(event) {
+            event.preventDefault();
+            const member = membersData.find(m => m.id === currentMemberId);
+            if (!member) return;
+
+            member.bank = {
+                name: document.getElementById('bank-name').value,
+                no: document.getElementById('bank-acc-no').value,
+                accName: document.getElementById('bank-acc-name').value
+            };
+
+            localStorage.setItem('si_members', JSON.stringify(membersData));
+            alert('Data rekening bank berhasil disimpan!');
+        }
+
+        function renderAdminData() {
+            let landingHtml = '';
+            landingSections.forEach((sec, idx) => {
+                const delBtn = sec.id.length > 10 ? `<button onclick="deleteLandingSec('${sec.id}')" class="text-red-400 hover:text-red-300 text-xs"><i class="fa-solid fa-trash"></i> Hapus</button>` : '';
+                landingHtml += `
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-sahabatPink text-sm">#${idx+1} Bagian: ${sec.id.toUpperCase()}</span>
+                            <div class="flex items-center space-x-3">
+                                <label class="text-xs text-slate-400 flex items-center gap-1.5 cursor-pointer">
+                                    <span>Tampilkan:</span>
+                                    <input type="checkbox" ${sec.active ? 'checked' : ''} onchange="toggleLandingSec('${sec.id}')" class="rounded text-sahabatPink">
+                                </label>
+                                ${delBtn}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Judul Besar Section</label>
+                                <input type="text" value="${escAttr(sec.title)}" id="l-title-${sec.id}" oninput="updateLandingSec('${sec.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Subjudul / Label Badge Atas</label>
+                                <input type="text" value="${escAttr(sec.badge)}" id="l-badge-${sec.id}" oninput="updateLandingSec('${sec.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-semibold text-slate-400">Paragraf Penjelasan Utama</label>
+                                <textarea id="l-desc-${sec.id}" oninput="updateLandingSec('${sec.id}')" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">${sec.desc}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">URL Gambar (Opsional)</label>
+                                <input type="text" value="${escAttr(sec.imageUrl)}" id="l-img-${sec.id}" oninput="updateLandingSec('${sec.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white" placeholder="https://...">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">URL Embed Video YouTube (Opsional)</label>
+                                <input type="text" value="${escAttr(sec.videoUrl)}" id="l-vid-${sec.id}" oninput="updateLandingSec('${sec.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white" placeholder="https://www.youtube.com/embed/...">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            const adminLandingList = document.getElementById('admin-landing-sections-list');
+            if(adminLandingList) adminLandingList.innerHTML = landingHtml;
+
+            let memberCmsHtml = '';
+            memberMenus.forEach((menu, idx) => {
+                const delMenuBtn = idx >= 5 ? `<button onclick="deleteMemberMenu('${menu.id}')" class="text-red-400 hover:text-red-300 text-xs"><i class="fa-solid fa-trash"></i> Hapus</button>` : '';
+                const customDescField = idx >= 5 ? `
+                    <div class="md:col-span-4">
+                        <label class="block text-[10px] font-semibold text-slate-400">Isi Penjelasan Halaman Menu Ini</label>
+                        <textarea id="m-cdesc-${menu.id}" oninput="updateMemberMenu('${menu.id}')" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white" placeholder="Tulis penjelasan lengkap untuk halaman menu ini...">${menu.customDesc || ''}</textarea>
+                    </div>
+                ` : '';
+                memberCmsHtml += `
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-sahabatPink text-sm">Menu Member #${idx+1} (ID: ${menu.id})</span>
+                            ${delMenuBtn}
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Nama Menu</label>
+                                <input type="text" value="${escAttr(menu.title)}" id="m-title-${menu.id}" oninput="updateMemberMenu('${menu.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Submenu / Keterangan</label>
+                                <input type="text" value="${escAttr(menu.submenu)}" id="m-sub-${menu.id}" oninput="updateMemberMenu('${menu.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Icon FontAwesome</label>
+                                <input type="text" value="${escAttr(menu.icon)}" id="m-icon-${menu.id}" oninput="updateMemberMenu('${menu.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold text-slate-400">Hak Akses Role</label>
+                                <select id="m-role-${menu.id}" onchange="updateMemberMenu('${menu.id}')" class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-xs text-white">
+                                    <option value="all" ${menu.roleRequired === 'all' ? 'selected' : ''}>Semua Member</option>
+                                    <option value="affiliate" ${menu.roleRequired === 'affiliate' ? 'selected' : ''}>Khusus Affiliate</option>
+                                </select>
+                            </div>
+                            ${customDescField}
+                        </div>
+                    </div>
+                `;
+            });
+            const adminMemberMenusList = document.getElementById('admin-member-menus-list');
+            if(adminMemberMenusList) adminMemberMenusList.innerHTML = memberCmsHtml;
+
+            const leadsHtml = membersData.map(m => {
+                const roleBadge = m.role === 'affiliate' 
+                    ? `<span class="bg-pink-100 text-sahabatPink px-2 py-0.5 rounded text-xs font-bold">Affiliate Partner</span>` 
+                    : `<span class="bg-slate-700 text-slate-300 px-2 py-0.5 rounded text-xs">Member Kelas</span>`;
+
+                const toggleRoleBtn = m.role === 'affiliate'
+                    ? `<button onclick="toggleMemberRole('${m.id}')" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 rounded text-xs font-semibold">Turunkan ke Member Biasa</button>`
+                    : `<button onclick="toggleMemberRole('${m.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded text-xs font-semibold">Aktifkan Affiliate &rarr;</button>`;
+
+                return `
+                    <tr class="border-b border-slate-700/50">
+                        <td class="py-3 font-semibold text-white">${m.name}</td>
+                        <td class="py-3 text-slate-300">${m.email}</td>
+                        <td class="py-3 text-slate-300 font-mono">${m.wa}</td>
+                        <td class="py-3">${roleBadge}</td>
+                        <td class="py-3">${toggleRoleBtn}</td>
+                    </tr>
+                `;
+            }).join('');
+            const leadsTableBody = document.getElementById('admin-leads-tbody');
+            if(leadsTableBody) leadsTableBody.innerHTML = leadsHtml;
+
+            const adminClsHtml = classesData.map(c => {
+                const discText = c.discPrice ? `(Diskon: Rp ${c.discPrice.toLocaleString('id-ID')})` : '';
+                return `
+                    <div class="flex justify-between items-center bg-slate-900 p-3 rounded-xl border border-slate-700 text-sm">
+                        <div>
+                            <span class="font-bold text-sahabatPink">${c.title}</span>
+                            <p class="text-xs text-slate-400">Harga: Rp ${c.price.toLocaleString('id-ID')} ${discText} | ${c.date}</p>
+                        </div>
+                        <button onclick="deleteClass(${c.id})" class="text-red-400 hover:text-red-300 text-xs font-semibold px-3 py-1"><i class="fa-solid fa-trash"></i> Hapus</button>
+                    </div>
+                `;
+            }).join('');
+            const adminClassesList = document.getElementById('admin-classes-list');
+            if(adminClassesList) adminClassesList.innerHTML = adminClsHtml;
+        }
+
+        function addLandingSection() {
+            const newId = 'sec_' + Date.now();
+            landingSections.push({ id: newId, title: 'Judul Section Baru', badge: 'SUBJUDUL BARU', desc: 'Penjelasan section baru.', bgType: 'white', videoUrl: '', imageUrl: '', active: true });
+            localStorage.setItem('si_landing_sections', JSON.stringify(landingSections));
+            renderLandingSections();
+            renderAdminData();
+        }
+
+        function toggleLandingSec(id) {
+            const sec = landingSections.find(s => s.id === id);
+            if(sec) {
+                sec.active = !sec.active;
+                localStorage.setItem('si_landing_sections', JSON.stringify(landingSections));
+                renderLandingSections();
+            }
+        }
+
+        function updateLandingSec(id) {
+            const sec = landingSections.find(s => s.id === id);
+            if(sec) {
+                sec.title = document.getElementById('l-title-' + id).value;
+                sec.badge = document.getElementById('l-badge-' + id).value;
+                sec.desc = document.getElementById('l-desc-' + id).value;
+                sec.imageUrl = document.getElementById('l-img-' + id).value;
+                sec.videoUrl = document.getElementById('l-vid-' + id).value;
+                localStorage.setItem('si_landing_sections', JSON.stringify(landingSections));
+                renderLandingSections();
+            }
+        }
+
+        function deleteLandingSec(id) {
+            if(confirm('Hapus section ini?')) {
+                landingSections = landingSections.filter(s => s.id !== id);
+                localStorage.setItem('si_landing_sections', JSON.stringify(landingSections));
+                renderLandingSections();
+                renderAdminData();
+            }
+        }
+
+        function addMemberMenu() {
+            const newId = 'menu_' + Date.now();
+            memberMenus.push({ id: newId, title: 'Menu Baru', submenu: 'Submenu Baru', icon: 'fa-solid fa-star', roleRequired: 'all', contentHtml: 'custom', customDesc: 'Tulis penjelasan detail di sini.' });
+            localStorage.setItem('si_member_menus', JSON.stringify(memberMenus));
+            renderAdminData();
+        }
+
+        function updateMemberMenu(id) {
+            const m = memberMenus.find(x => x.id === id);
+            if(m) {
+                m.title = document.getElementById('m-title-' + id).value;
+                m.submenu = document.getElementById('m-sub-' + id).value;
+                m.icon = document.getElementById('m-icon-' + id).value;
+                m.roleRequired = document.getElementById('m-role-' + id).value;
+                const cDescEl = document.getElementById('m-cdesc-' + id);
+                if(cDescEl) m.customDesc = cDescEl.value;
+                localStorage.setItem('si_member_menus', JSON.stringify(memberMenus));
+            }
+        }
+
+        function deleteMemberMenu(id) {
+            if(confirm('Hapus menu member ini?')) {
+                memberMenus = memberMenus.filter(m => m.id !== id);
+                localStorage.setItem('si_member_menus', JSON.stringify(memberMenus));
+                renderAdminData();
+            }
+        }
+
+        function toggleMemberRole(memberId) {
+            const m = membersData.find(x => x.id === memberId);
+            if(m) {
+                m.role = m.role === 'affiliate' ? 'member' : 'affiliate';
+                localStorage.setItem('si_members', JSON.stringify(membersData));
+                renderAdminData();
+                alert(`Role ${m.name} berhasil diubah menjadi ${m.role.toUpperCase()}`);
+            }
+        }
+
+        function adminAddClass(event) {
+            event.preventDefault();
+            const newC = {
+                id: Date.now(),
+                title: document.getElementById('new-class-title').value,
+                price: parseInt(document.getElementById('new-class-price').value),
+                discPrice: document.getElementById('new-class-disc-price').value ? parseInt(document.getElementById('new-class-disc-price').value) : null,
+                date: document.getElementById('new-class-date').value,
+                speaker: document.getElementById('new-class-speaker').value,
+                waGroup: document.getElementById('new-class-wargroup').value,
+                poster: document.getElementById('new-class-poster').value,
+                desc: document.getElementById('new-class-desc').value
+            };
+            classesData.push(newC);
+            localStorage.setItem('si_classes', JSON.stringify(classesData));
+            renderClasses();
+            renderAdminData();
+            event.target.reset();
+            alert('Kelas baru berhasil ditambahkan!');
+        }
+
+        function deleteClass(id) {
+            if(confirm('Yakin ingin menghapus kelas ini?')) {
+                classesData = classesData.filter(c => c.id !== id);
+                localStorage.setItem('si_classes', JSON.stringify(classesData));
+                renderClasses();
+                renderAdminData();
+            }
+        }
+    </script>
+</body>
+</html>
